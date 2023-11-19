@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Baby Life</string>
+    <string name="btnAddFeeding">Feeding</string>
+    <string name="btnAddChange">Diaper Change</string>
+    <string name="btnAddPump">Pumping Session</string>
+    <string name="btnAddSleep">Sleep</string>
+    <string name="btnViewFeedingData">View Feedings</string>
+    <string name="btnViewChange">View Diaper Changes</string>
+    <string name="btnViewPump">View Pumping Sessions</string>
+    <string name="btnViewSleep">View Sleep</string>
+    <string name="btnViewBabyCharts">View Baby Charts</string>
+    <string name="btnViewBabyData">View Baby Data</string>
+    <string name="txtBabyName">Baby Name</string>
+    <string name="btnAddABaby">Please add a Child</string>
+    <string name="btnCancel">Cancel</string>
+    <string name="btnSave">Save</string>
+    <string name="barChart">Babies Bar Chart information</string>
+    <string name="my_chart">Babies Chart Information</string>
+</resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "776290977649",
+    "project_id": "babylife-8b3e0",
+    "storage_bucket": "babylife-8b3e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776290977649:android:0c64662b32a9c71e2598d0",
+        "android_client_info": {
+          "package_name": "com.example.babylife"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbCcB6tzBtwP5w7gBDgoIvTA17wxCMbqE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rvSQLData;
     private SQLChildAdapter adapter;
     private SQLiteHelper helper;
+    private SQLiteBabyName dbHelper;
+    private ImageView deleteTable;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -47,8 +50,11 @@ public class MainActivity extends AppCompatActivity {
         btnPhotoProgress = findViewById(R.id.btnPhotoGallery);
         rvSQLData = findViewById(R.id.rv_latest_data);
         btnAddSleep = findViewById(R.id.btnSleepAdd);
+        deleteTable = findViewById(R.id.ivDeleteTable);
 
-
+        //Load names for Children from db
+        dbHelper = new SQLiteBabyName(this);
+        updateUIChildData();
 
         //Setup RV for sqlite data
         rvSQLData.setLayoutManager(new LinearLayoutManager(this));
@@ -59,19 +65,29 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize the database helper
         helper = new SQLiteHelper(this);
-
+     //   helper.deleteAllEntries(ChildLogContract.DiaperLogEntry.TABLE_NAME);
         // Populate the data
-        populateSQLiteData();
+       // populateSQLiteData();
 
         //Load the data
         loadSQLiteData();
 
 
+
+        deleteTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                helper.deleteAllEntries(ChildLogContract.DiaperLogEntry.TABLE_NAME);
+                loadSQLiteData();
+                updateUIChildData();
+            }
+        });
         //Setup Button navigation
         btnAddSleep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "More coming soon!", Toast.LENGTH_LONG);
+                Toast.makeText(MainActivity.this, "More coming soon!", Toast.LENGTH_LONG).show();
+
 
             }
         });
@@ -121,19 +137,42 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Toast.makeText(MainActivity.this, "More coming soon!", Toast.LENGTH_LONG).show();
             }
         });
+        btnPumpingSession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Toast.makeText(MainActivity.this, "More coming soon!", Toast.LENGTH_LONG).show();
+            }
+        });
+        btnViewCharts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, BabyDataChart.class);
+                startActivity(i);
+            }
+        });
     }
 
+    //Load the current data from the database
     private void loadSQLiteData() {
+        //Loads the sqlite data with a simple query
+        //Future this will need to be recreated and changed for more complex queries.
         SQLiteDatabase db = helper.getReadableDatabase();
 
         Cursor cursor = db.query(ChildLogContract.DiaperLogEntry.TABLE_NAME, null, null, null, null, null, null);
-        adapter.swapCursor(cursor);
+        if (adapter != null) {
+            adapter.swapCursor(cursor);
+        } else {
+            Log.e("MainActivity", "Adapter is null");
+        }
     }
 
-    private void populateSQLiteData() {
+    //Removed dummy data
+    /* private void populateSQLiteData() {
+        //Sets Dummy Data into the SQLITE database
         //initialize
         SQLiteHelper dbHelper = new SQLiteHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -165,32 +204,29 @@ public class MainActivity extends AppCompatActivity {
         values.put(ChildLogContract.DiaperLogEntry.COLUMN_TYPE, "Poop");
         values.put(ChildLogContract.DiaperLogEntry.COLUMN_NOTES, "Normal");
         long newRowId2 = db.insert(ChildLogContract.DiaperLogEntry.TABLE_NAME, null, values);
-    }
+    }*/
 
+    //When resuming the activity. This updates the information to it's current state includes additions and deletions.
     @Override
     protected void onResume(){
         super.onResume();
+        loadSQLiteData();
         updateUIChildData();
     }
+    //Retrieves the names from the childnames database and populates the spinner with them
     private void updateUIChildData(){
-        List<ChildInfo> childInfoList = ChildDataListManager.getInstance().getChildInfoList();
-        Log.d("MainActivity", "Child list size: " + childInfoList.size()); // Debug log
+        List<String> childNames = dbHelper.getAllChildNames(); // Fetch names from the database
+        Log.d("MainActivity", "Child list size: " + childNames.size());
 
-        if (!childInfoList.isEmpty()) {
-            List<String> names = new ArrayList<>();
-            for (ChildInfo child : childInfoList) {
-                names.add(child.getName());
-                Log.d("MainActivity", "Child name: " + child.getName()); // Debug log
-            }
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, names);
+        if (!childNames.isEmpty()) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, childNames);
             spinnerBabyName.setAdapter(adapter);
-
             setButtonsVisibility(View.VISIBLE);
         } else {
             setButtonsVisibility(View.INVISIBLE);
         }
     }
+    //Updates visibility
     private void setButtonsVisibility(int visibility) {
         btnAddAFeeding.setVisibility(visibility);
         btnAddDiaperChange.setVisibility(visibility);
@@ -201,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
         btnViewCharts.setVisibility(visibility);
     }
 
+    //on exit
 @Override
     protected void onDestroy(){
         super.onDestroy();

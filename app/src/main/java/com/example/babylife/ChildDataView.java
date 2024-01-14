@@ -27,7 +27,6 @@ public class ChildDataView extends AppCompatActivity {
     }
 
     private void setData() {
-
         diaperLogs.add(new DiaperChangeLogList("Samuel M", "2023-11-19", "08:00 AM", "Wet", "N/A"));
         diaperLogs.add(new DiaperChangeLogList("Samuel M", "2023-11-19", "11:00 AM", "Both", "N/A"));
         diaperLogs.add(new DiaperChangeLogList("Samuel M", "2023-11-19", "03:05 PM", "Poop", "N/A"));

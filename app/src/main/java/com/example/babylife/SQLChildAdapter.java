@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SQLChildAdapter extends RecyclerView.Adapter<SQLChildAdapter.ViewHolder> {
+    //This binds my data from my Sqlite database into the view holder which currently has the layout for each item.
+
     private Context context;
     private Cursor cursor;
 
@@ -50,9 +52,7 @@ public class SQLChildAdapter extends RecyclerView.Adapter<SQLChildAdapter.ViewHo
         holder.tvTypeEntry.setText(type);
         holder.tvAdditionalNotesEntry.setText(notes);
 
-        // Set image resource for log type if applicable
-        // You might want to have a method to map 'type' to a drawable resource ID
-        // holder.ivLogTypeImageEntry.setImageResource(R.drawable.your_drawable_id);
+
     }
 
     @Override

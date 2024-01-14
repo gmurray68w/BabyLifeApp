@@ -4,7 +4,6 @@ public class DiaperChangeLogList {
     String name;
     String date;
     String time;
-
     String type;
     String notes;
 

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddABabyActivity extends AppCompatActivity {
 //Declare variables
@@ -21,6 +22,8 @@ public class AddABabyActivity extends AppCompatActivity {
     private Button btnCancel;
 
     private String dateChosen;
+
+    private SQLiteBabyName db;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class AddABabyActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
         tvChildInfo.setVisibility(View.INVISIBLE);
 
+        db = new SQLiteBabyName(this);
         etChildName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -60,10 +64,14 @@ public class AddABabyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String childName = etChildName.getText().toString();
                 if (childName != null && !childName.isEmpty() && dateChosen != null && !dateChosen.isEmpty()) {
-                    ChildInfo childInfo = new ChildInfo(childName, dateChosen);
-                    ChildDataListManager.getInstance().addChildInfo(childInfo);
-                    // Optionally, you can add a finish() here if you want to close the activity after saving
+                    // Save the data to the SQLite database
+                    db.addChild(childName, dateChosen);
+
+                    // Optional: Display a message or close the activity
+                    Toast.makeText(AddABabyActivity.this, "Child saved!", Toast.LENGTH_SHORT).show();
                     finish();
+                } else {
+                    Toast.makeText(AddABabyActivity.this, "Please enter all details", Toast.LENGTH_SHORT).show();
                 }
             }
         });

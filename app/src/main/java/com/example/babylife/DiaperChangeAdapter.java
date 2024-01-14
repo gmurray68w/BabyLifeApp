@@ -33,9 +33,6 @@ public class DiaperChangeAdapter extends RecyclerView.Adapter<DiaperChangeAdapte
         holder.tvTimeEntry.setText(logEntry.getTime());
         holder.tvTypeEntry.setText(logEntry.getType());
         holder.tvAdditionalNotesEntry.setText(logEntry.getNotes());
-
-        // Assuming you have a method in your logEntry to get the drawable resource ID
-        // holder.ivLogTypeImageEntry.setImageResource(logEntry.getImageResource());
     }
 
     @Override

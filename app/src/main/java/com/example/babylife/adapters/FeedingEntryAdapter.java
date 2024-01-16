@@ -1,4 +1,4 @@
-package com.example.babylife;
+package com.example.babylife.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -12,7 +12,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import com.example.babylife.R;
+import com.example.babylife.contracts.FeedingLogContract;
 
 public class FeedingEntryAdapter extends RecyclerView.Adapter<FeedingEntryAdapter.ViewHolder> {
 
@@ -21,6 +22,10 @@ public class FeedingEntryAdapter extends RecyclerView.Adapter<FeedingEntryAdapte
 
     public FeedingEntryAdapter(Context context){this.context = context;}
 
+    public FeedingEntryAdapter(Context context, Cursor cursor){
+        this.context = context;
+        this.cursor = cursor;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

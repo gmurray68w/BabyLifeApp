@@ -1,4 +1,4 @@
-package com.example.babylife;
+package com.example.babylife.contracts;
 
 import android.provider.BaseColumns;
 

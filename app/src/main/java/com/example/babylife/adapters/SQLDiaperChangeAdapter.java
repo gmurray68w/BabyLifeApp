@@ -1,4 +1,4 @@
-package com.example.babylife;
+package com.example.babylife.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -11,13 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SQLChildAdapter extends RecyclerView.Adapter<SQLChildAdapter.ViewHolder> {
+import com.example.babylife.R;
+import com.example.babylife.contracts.DiaperChangeContract;
+
+public class SQLDiaperChangeAdapter extends RecyclerView.Adapter<SQLDiaperChangeAdapter.ViewHolder> {
     //This binds my data from my Sqlite database into the view holder which currently has the layout for each item.
 
     private Context context;
     private Cursor cursor;
 
-    public SQLChildAdapter(Context context) {
+    public SQLDiaperChangeAdapter(Context context) {
         this.context = context;
     }
 
@@ -34,11 +37,11 @@ public class SQLChildAdapter extends RecyclerView.Adapter<SQLChildAdapter.ViewHo
         if (!cursor.moveToPosition(position)) return;
 
 
-        int nameColumnIndex = cursor.getColumnIndex(ChildLogContract.DiaperLogEntry.COLUMN_NAME);
-        int dateColumnIndex = cursor.getColumnIndex(ChildLogContract.DiaperLogEntry.COLUMN_DATE);
-        int timeColumnIndex = cursor.getColumnIndex(ChildLogContract.DiaperLogEntry.COLUMN_TIME);
-        int typeColumnIndex = cursor.getColumnIndex(ChildLogContract.DiaperLogEntry.COLUMN_TYPE);
-        int notesColumnIndex = cursor.getColumnIndex(ChildLogContract.DiaperLogEntry.COLUMN_NOTES);
+        int nameColumnIndex = cursor.getColumnIndex(DiaperChangeContract.DiaperLogEntry.COLUMN_NAME);
+        int dateColumnIndex = cursor.getColumnIndex(DiaperChangeContract.DiaperLogEntry.COLUMN_DATE);
+        int timeColumnIndex = cursor.getColumnIndex(DiaperChangeContract.DiaperLogEntry.COLUMN_TIME);
+        int typeColumnIndex = cursor.getColumnIndex(DiaperChangeContract.DiaperLogEntry.COLUMN_TYPE);
+        int notesColumnIndex = cursor.getColumnIndex(DiaperChangeContract.DiaperLogEntry.COLUMN_NOTES);
 
         String name = cursor.getString(nameColumnIndex);
         String date = cursor.getString(dateColumnIndex);

@@ -1,7 +1,5 @@
 package com.example.babylife;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -12,6 +10,8 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.babylife.sqlitefiles.SQLiteBabyName;
 
 public class AddABabyActivity extends AppCompatActivity {
 //Declare variables

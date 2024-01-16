@@ -13,22 +13,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.babylife.helpers.SQLiteDiaperHelper;
+import com.example.babylife.sqlitefiles.SQLiteBabyName;
+
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Date;
 
 public class AddADiaperChange extends AppCompatActivity {
     private Spinner spinnerChildName, spinnerDateTime;
@@ -39,7 +37,7 @@ public class AddADiaperChange extends AppCompatActivity {
     private String selectedDateTime;
     private EditText babyChangeNotes;
     private SQLiteBabyName dbHelper;
-    private SQLiteHelper diaperChangeDb;
+    private SQLiteDiaperHelper diaperChangeDb;
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +52,7 @@ public class AddADiaperChange extends AppCompatActivity {
         tvInfo = findViewById(R.id.tvInfoDiaper);
         btnSave = findViewById(R.id.btnSaveDiaper);
         btnCancel = findViewById(R.id.btnCancelDiaper);
-        diaperChangeDb = new SQLiteHelper(this);
+        diaperChangeDb = new SQLiteDiaperHelper(this);
         dbHelper = new SQLiteBabyName(this);
         loadBabyName();
 

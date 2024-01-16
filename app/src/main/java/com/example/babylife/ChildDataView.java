@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.babylife.adapters.DiaperChangeAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class ChildDataView extends AppCompatActivity {
         
         setData();
 
-        DiaperChangeAdapter  adapter = new DiaperChangeAdapter(diaperLogs);
+        DiaperChangeAdapter adapter = new DiaperChangeAdapter(diaperLogs);
         recyclerView.setAdapter(adapter);
     }
 

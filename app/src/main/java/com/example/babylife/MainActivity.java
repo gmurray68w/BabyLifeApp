@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,7 +19,14 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.example.babylife.adapters.FeedingEntryAdapter;
+import com.example.babylife.adapters.SQLDiaperChangeAdapter;
+import com.example.babylife.contracts.DiaperChangeContract;
+import com.example.babylife.contracts.FeedingLogContract;
+import com.example.babylife.helpers.SQLiteAddAFeedingHelper;
+import com.example.babylife.helpers.SQLiteDiaperHelper;
+import com.example.babylife.sqlitefiles.SQLiteBabyName;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,9 +37,11 @@ public class MainActivity extends AppCompatActivity {
             btnPhotoProgress, btnLogin, btnProfile, btnAddSleep;
 
     private RecyclerView rvSQLData;
-    private SQLChildAdapter adapter;
+    private SQLDiaperChangeAdapter adapter;
     private FeedingEntryAdapter feedingEntryAdapter;
-    private SQLiteHelper helper;
+    private SQLiteDiaperHelper helper;
+
+    private SQLiteAddAFeedingHelper feedingHelper;
     private SQLiteBabyName dbHelper;
     private ImageView deleteTable;
     private Context context;
@@ -57,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         btnAddSleep = findViewById(R.id.btnSleepAdd);
         deleteTable = findViewById(R.id.ivDeleteTable);
         context = this;
+        feedingHelper = new SQLiteAddAFeedingHelper(this);
 //Setup Spinner logs
         String[] logSelection = {"Diaper Log","Feeding Log", "Sleep log", "Pumping log"};
 
@@ -73,59 +82,53 @@ public class MainActivity extends AppCompatActivity {
         rvSQLData.setLayoutManager(new LinearLayoutManager(this));
 
         // Initialize the adapter with context but no cursor yet
-        adapter = new SQLChildAdapter(this);
-        rvSQLData.setAdapter(adapter);
+        adapter = new SQLDiaperChangeAdapter(this);
+        feedingEntryAdapter = new FeedingEntryAdapter(this);
+        rvSQLData.setAdapter(feedingEntryAdapter);
 
         // Initialize the database helper
-        helper = new SQLiteHelper(this);
+        helper = new SQLiteDiaperHelper(this);
         //Load the data
-        loadSQLiteData();
+        loadFeedingData();
 
-        spinnerDataType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        //Set spinner data logs to change the recyclerview adapter and display different sqlite databases
+      spinnerDataType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedItem = adapterView.getItemAtPosition(i).toString();
 
-
-                // Check if the selected item is 'Feeding Log'
                 if (selectedItem.equals("Feeding Log")) {
                     Log.d("SpinnerDebug", "Setting up Feeding Entry Adapter");
-
-                    // Set the Feeding Entry adapter to the RecyclerView
-                    feedingEntryAdapter = new FeedingEntryAdapter(context); // Replace with your Feeding Entry adapter
-                    rvSQLData.setAdapter(feedingEntryAdapter);
-                    feedingEntryAdapter.notifyDataSetChanged();
-                } else {
+                    feedingEntryAdapter = new FeedingEntryAdapter(context);
+                  rvSQLData.setAdapter(feedingEntryAdapter);
+                  loadFeedingData();
+                  feedingEntryAdapter.notifyDataSetChanged();
+                } if(selectedItem.equals("Diaper Log")){
                     // Reset to default adapter for other selections
                     rvSQLData.setAdapter(adapter);
+                    loadSQLiteData();
                     adapter.notifyDataSetChanged();
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                // Optional handling if needed
             }
         });
-     //   recyclerviewSetupDiaperChange();
-     //   recyclerviewSetupFeedingEntry();
 
-     //   helper.deleteAllEntries(ChildLogContract.DiaperLogEntry.TABLE_NAME);
-        // Populate the data
-       // populateSQLiteData();
-
-
-
-
-
+      //Delete the table entries to start over with an empty sqlite table
         deleteTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                helper.deleteAllEntries(ChildLogContract.DiaperLogEntry.TABLE_NAME);
+                helper.deleteAllEntries(DiaperChangeContract.DiaperLogEntry.TABLE_NAME);
                 loadSQLiteData();
                 updateUIChildData();
             }
         });
+
         //Setup Button navigation
         btnAddSleep.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        //View charts listener
         btnViewCharts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //View photos
         btnPhotoProgress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Add a child button
         btnAddChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //View data button
         btnViewData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,12 +173,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //Add pumping session data
+        //TODO: ADD LAYOUT AND CONFIGURE TABLES
         btnPumpingSession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
         });
+
+        //Add a diaper change entry
         btnAddDiaperChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,6 +191,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //Add a diaper change entry
         btnAddAFeeding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -184,6 +200,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //Add a pumping session entry
+        //TODO: LAyouts and configure
         btnPumpingSession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,6 +210,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "More coming soon!", Toast.LENGTH_LONG).show();
             }
         });
+
+        //View Charts of data
+        //TODO Configure with current data
         btnViewCharts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,42 +222,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void recyclerviewSetupFeedingEntry() {
-        //Setup RV for sqlite data
-        rvSQLData.setLayoutManager(new LinearLayoutManager(this));
-
-        // Initialize the adapter with context but no cursor yet
-        FeedingEntryAdapter adapter = new FeedingEntryAdapter(this);
-        rvSQLData.setAdapter(adapter);
-
-        // Initialize the database helper
-        helper = new SQLiteHelper(this);
-        loadFeedingData();
+    // Method to fetch data for feeding log
+    private Cursor fetchDataForFeedingLog() {
+// Assuming you have a method in SQLiteAddAFeeding or similar class to fetch feeding data
+        SQLiteAddAFeedingHelper dbFeedingHelper = new SQLiteAddAFeedingHelper(context);
+        return dbFeedingHelper.fetchFeedingLogs(); // This method should query the database and return a Cursor
     }
 
+    //TO help with the recyclerview adapter and cursors when loading RV.
     private void loadFeedingData() {
-        SQLiteDatabase db = helper.getReadableDatabase();
-
+        SQLiteDatabase db = feedingHelper.getReadableDatabase();
         Cursor cursor = db.query(FeedingLogContract.FeedingLogEntry.TABLE_NAME, null, null, null, null, null, null);
-        if (adapter != null) {
-            adapter.swapCursor(cursor);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            Log.d("MainActivity", "Cursor has " + cursor.getCount() + " entries");
+            feedingEntryAdapter.swapCursor(cursor);
         } else {
-            Log.e("MainActivity", "Adapter is null");
+            Log.e("MainActivity", "Cursor is empty or null");
         }
-    }
-
-    private void recyclerviewSetupDiaperChange() {
-        //Setup RV for sqlite data
-        rvSQLData.setLayoutManager(new LinearLayoutManager(this));
-
-        // Initialize the adapter with context but no cursor yet
-        SQLChildAdapter adapter = new SQLChildAdapter(this);
-        rvSQLData.setAdapter(adapter);
-
-        // Initialize the database helper
-        helper = new SQLiteHelper(this);
-        //Load the data
-        loadSQLiteData();
     }
 
     //Load the current data from the database
@@ -244,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
         //Future this will need to be recreated and changed for more complex queries.
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        Cursor cursor = db.query(ChildLogContract.DiaperLogEntry.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = db.query(DiaperChangeContract.DiaperLogEntry.TABLE_NAME, null, null, null, null, null, null);
         if (adapter != null) {
             adapter.swapCursor(cursor);
         } else {
@@ -292,9 +296,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        loadFeedingData();
         loadSQLiteData();
         updateUIChildData();
     }
+
     //Retrieves the names from the childnames database and populates the spinner with them
     private void updateUIChildData(){
         List<String> childNames = dbHelper.getAllChildNames(); // Fetch names from the database
@@ -308,6 +314,7 @@ public class MainActivity extends AppCompatActivity {
             setButtonsVisibility(View.INVISIBLE);
         }
     }
+
     //Updates visibility
     private void setButtonsVisibility(int visibility) {
         btnAddAFeeding.setVisibility(visibility);

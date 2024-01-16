@@ -1,9 +1,9 @@
-package com.example.babylife;
+package com.example.babylife.contracts;
 
 import android.provider.BaseColumns;
 
-public class ChildLogContract {
-    private ChildLogContract(){}
+public class DiaperChangeContract {
+    private DiaperChangeContract(){}
 
     //Sets up the column names for my sqlite table
     public static class DiaperLogEntry implements BaseColumns{

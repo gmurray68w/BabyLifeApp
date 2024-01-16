@@ -1,4 +1,4 @@
-package com.example.babylife;
+package com.example.babylife.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,8 +6,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.babylife.DiaperChangeLogList;
+import com.example.babylife.R;
 
 import java.util.List;
 

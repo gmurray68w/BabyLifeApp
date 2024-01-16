@@ -1,4 +1,4 @@
-package com.example.babylife;
+package com.example.babylife.sqlitefiles;
 
 import android.content.ContentValues;
 import android.content.Context;

@@ -20,6 +20,9 @@
         android:theme="@style/Theme.BabyLife"
         tools:targetApi="31">
         <activity
+            android:name=".AddAFeedingActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChildDataView"
             android:exported="false" />
         <activity
@@ -48,7 +51,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

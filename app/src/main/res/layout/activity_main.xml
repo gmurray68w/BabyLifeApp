@@ -101,7 +101,7 @@
         android:layout_height="280dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSelectData" />
 
     <Button
         android:id="@+id/btnSleepAdd"
@@ -123,17 +123,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerBabyName" />
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Latest Data"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/rv_latest_data"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddBaby" />
-
     <ImageView
         android:id="@+id/ivDeleteTable"
         android:layout_width="wrap_content"
@@ -142,5 +131,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAddBaby"
         app:srcCompat="@android:drawable/ic_delete" />
+
+    <Spinner
+        android:id="@+id/spinnerSelectData"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/ivDeleteTable"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddBaby" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

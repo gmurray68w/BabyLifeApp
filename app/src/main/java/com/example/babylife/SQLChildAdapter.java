@@ -33,7 +33,7 @@ public class SQLChildAdapter extends RecyclerView.Adapter<SQLChildAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (!cursor.moveToPosition(position)) return;
 
-        // Assuming these are the column indices in your database
+
         int nameColumnIndex = cursor.getColumnIndex(ChildLogContract.DiaperLogEntry.COLUMN_NAME);
         int dateColumnIndex = cursor.getColumnIndex(ChildLogContract.DiaperLogEntry.COLUMN_DATE);
         int timeColumnIndex = cursor.getColumnIndex(ChildLogContract.DiaperLogEntry.COLUMN_TIME);

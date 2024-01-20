@@ -109,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Duration:"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/tv_feeding_entry_name"
                 app:layout_constraintTop_toTopOf="@+id/tv_feeding_duration_entry" />
 
@@ -117,6 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Amount:"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView14"
                 app:layout_constraintTop_toTopOf="@+id/tv_feeding_amount_entry" />
 
@@ -125,6 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Notes:"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView16"
                 app:layout_constraintTop_toTopOf="@+id/tv_feeding_additional_notes" />
 
@@ -134,6 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:text="Time:"
+                android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/tv_feeding_duration_entry"
                 app:layout_constraintTop_toTopOf="@+id/tv_feeding_time_entry" />
 
@@ -142,6 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Type:"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView18"
                 app:layout_constraintTop_toTopOf="@+id/tv_feeding_type_entry" />
 

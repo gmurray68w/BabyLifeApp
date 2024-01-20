@@ -7,6 +7,8 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -18,7 +20,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BabyLife"
-        tools:targetApi="31">
+        tools:targetApi="34">
+        <activity
+            android:name=".NotificationActivity"
+            android:exported="false" />
         <activity
             android:name=".AddAFeedingActivity"
             android:exported="false" />
@@ -52,6 +57,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+        <!-- Receiver entry -->
+        <receiver android:name=".NotificationActivity$NotificationReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.babylife.ACTION_NOTIFY" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

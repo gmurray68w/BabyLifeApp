@@ -1,14 +1,22 @@
 package com.example.babylife;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,11 +38,14 @@ import com.example.babylife.sqlitefiles.SQLiteBabyName;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE_POST_NOTIFICATION = 1002; // Arbitrary request code
+    private static final int NOTIFICATION_ID = 1;
+    private static final String CHANNEL_ID = "baby_notification";
     private Spinner spinnerBabyName;
     private Spinner spinnerDataType;
     private String name, bday;
-    private Button btnAddAFeeding, btnAddDiaperChange, btnPumpingSession, btnViewData, btnAddChild,btnViewCharts,
-            btnPhotoProgress, btnLogin, btnProfile, btnAddSleep;
+    private Button btnAddAFeeding, btnAddDiaperChange, btnPumpingSession, btnViewData, btnAddChild, btnViewCharts,
+            btnPhotoProgress, btnLogin, btnProfile, btnAddSleep, btnNotification;
 
     private RecyclerView rvSQLData;
     private SQLDiaperChangeAdapter adapter;
@@ -52,6 +63,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
         spinnerBabyName = findViewById(R.id.spinnerBabyName);
         spinnerDataType = findViewById(R.id.spinnerSelectData);
         btnAddAFeeding = findViewById(R.id.btnAddAFeeding);
@@ -60,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         btnViewData = findViewById(R.id.btnViewData);
         btnViewCharts = findViewById(R.id.btnChart);
         btnAddChild = findViewById(R.id.btnAddBaby);
+        btnNotification = findViewById(R.id.btnNotificationActivity);
         btnPhotoProgress = findViewById(R.id.btnPhotoGallery);
         rvSQLData = findViewById(R.id.rv_latest_data);
         btnAddSleep = findViewById(R.id.btnSleepAdd);
@@ -67,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         feedingHelper = new SQLiteAddAFeedingHelper(this);
 //Setup Spinner logs
-        String[] logSelection = {"Diaper Log","Feeding Log", "Sleep log", "Pumping log"};
+        String[] logSelection = {"Diaper Log", "Feeding Log", "Sleep log", "Pumping log"};
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, logSelection);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -76,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         //Load names for Children from db
         dbHelper = new SQLiteBabyName(this);
         updateUIChildData();
-
+        showTestNotification();
 
         //Setup RV for sqlite data
         rvSQLData.setLayoutManager(new LinearLayoutManager(this));
@@ -93,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Set spinner data logs to change the recyclerview adapter and display different sqlite databases
-      spinnerDataType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerDataType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -102,10 +125,11 @@ public class MainActivity extends AppCompatActivity {
                 if (selectedItem.equals("Feeding Log")) {
                     Log.d("SpinnerDebug", "Setting up Feeding Entry Adapter");
                     feedingEntryAdapter = new FeedingEntryAdapter(context);
-                  rvSQLData.setAdapter(feedingEntryAdapter);
-                  loadFeedingData();
-                  feedingEntryAdapter.notifyDataSetChanged();
-                } if(selectedItem.equals("Diaper Log")){
+                    rvSQLData.setAdapter(feedingEntryAdapter);
+                    loadFeedingData();
+                    feedingEntryAdapter.notifyDataSetChanged();
+                }
+                if (selectedItem.equals("Diaper Log")) {
                     // Reset to default adapter for other selections
                     rvSQLData.setAdapter(adapter);
                     loadSQLiteData();
@@ -119,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-      //Delete the table entries to start over with an empty sqlite table
+        //Delete the table entries to start over with an empty sqlite table
         deleteTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -220,6 +244,40 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        btnNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, NotificationActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
+    private void showTestNotification() {
+        Intent intent = new Intent(this, MainActivity.class);
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            flags |= PendingIntent.FLAG_IMMUTABLE;
+        }
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, flags);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_foreground) // replace with your notification icon
+                .setContentTitle("Test Notification")
+                .setContentText("This is a test notification.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // Permission check or request code here
+                return;
+            }
+        }
+        notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 
     // Method to fetch data for feeding log

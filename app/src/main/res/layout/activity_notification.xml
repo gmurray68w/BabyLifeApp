@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextClock
+        android:id="@+id/textClock"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSetNotificationTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textClock" />
+
+    <TextView
+        android:id="@+id/tvTimeSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No time set."
+        app:layout_constraintEnd_toEndOf="@+id/btnSetNotificationTime"
+        app:layout_constraintStart_toStartOf="@+id/btnSetNotificationTime"
+        app:layout_constraintTop_toBottomOf="@+id/btnSetNotificationTime" />
+
+    <TextView
+        android:id="@+id/tvTypeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Type of notification:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimeSet" />
+
+    <Spinner
+        android:id="@+id/spinnerNotificationType"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTypeSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTypeSpinner" />
+
+    <TextView
+        android:id="@+id/tvFrequencyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Frequency of notification"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvTypeSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/tvTypeSpinner" />
+
+    <Spinner
+        android:id="@+id/spinnerFrequencyNotification"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFrequencyText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvFrequencyText" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSavedNotifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSaveNotification" />
+
+    <TextView
+        android:id="@+id/tvNotificationInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Notification text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFrequencyText" />
+
+    <Button
+        android:id="@+id/btnSaveNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save:"
+        app:layout_constraintEnd_toEndOf="@+id/tvNotificationInfo"
+        app:layout_constraintStart_toStartOf="@+id/tvNotificationInfo"
+        app:layout_constraintTop_toBottomOf="@+id/tvNotificationInfo" />
+
+    <TextView
+        android:id="@+id/tvDateSetNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No date set:"
+        app:layout_constraintEnd_toEndOf="@+id/tvTimeSet"
+        app:layout_constraintStart_toStartOf="@+id/tvTimeSet"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimeSet" />
+</androidx.constraintlayout.widget.ConstraintLayout>

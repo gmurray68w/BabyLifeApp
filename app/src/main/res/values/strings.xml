@@ -16,4 +16,22 @@
     <string name="btnSave">Save</string>
     <string name="barChart">Babies Bar Chart information</string>
     <string name="my_chart">Babies Chart Information</string>
+    <string name="channel_name">My Channel</string>
+    <string name="channel_description">Channel description</string>
+    <string name="CHANNEL_ID">ID</string>
+    <string-array name="notification_types_array">
+        <item>Diaper Change</item>
+        <item>Sleep</item>
+        <item>Feeding</item>
+        <item>Pumping</item>
+    </string-array>
+
+    <string-array name="notification_frequency_array">
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>6 hours</item>
+        <item>12 hours</item>
+        <item>24 hours</item>
+    </string-array>
+
 </resources>

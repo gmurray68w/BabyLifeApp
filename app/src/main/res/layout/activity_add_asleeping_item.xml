@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_sleeping_entry"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_log_type_sleeping_image_entry"
+                android:layout_width="46dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/baby_sleeping_icon" />
+
+            <TextView
+                android:id="@+id/tv_sleeping_entry_name"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Samuel M"
+                android:maxLines="2"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_log_type_sleeping_image_entry"
+                app:layout_constraintStart_toEndOf="@+id/iv_log_type_sleeping_image_entry"
+                app:layout_constraintTop_toTopOf="@+id/iv_log_type_sleeping_image_entry" />
+
+            <TextView
+                android:id="@+id/tv_sleeping_date_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="11/19/23"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sleeping_entry_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_entry_name" />
+
+            <TextView
+                android:id="@+id/tv_sleeping_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="11:08 PM"
+                app:layout_constraintBottom_toTopOf="@+id/tv_sleeping_date_entry"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_sleeping_additional_notes"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Notes:"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sleeping_duration_entry" />
+
+            <TextView
+                android:id="@+id/tv_sleeping_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:30"
+                app:layout_constraintEnd_toStartOf="@+id/tv_sleeping_end_time"
+                app:layout_constraintStart_toEndOf="@+id/tv_sleeping_entry_name"
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_end_time" />
+
+            <TextView
+                android:id="@+id/tv_sleeping_duration_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="38 m"
+                app:layout_constraintEnd_toEndOf="@+id/tv_sleeping_start_time"
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_date_entry" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Start:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/tv_sleeping_entry_name"
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_start_time" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duration"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView14"
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_duration_entry" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notes:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView16"
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_additional_notes" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="End:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/tv_sleeping_start_time"
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_end_time" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date:"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/textView18"
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_date_entry" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

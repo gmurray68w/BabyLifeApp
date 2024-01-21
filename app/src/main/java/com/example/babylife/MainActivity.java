@@ -1,5 +1,6 @@
 package com.example.babylife;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -27,18 +28,23 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import android.Manifest;
+
 import com.example.babylife.adapters.FeedingEntryAdapter;
 import com.example.babylife.adapters.SQLDiaperChangeAdapter;
+import com.example.babylife.adapters.SleepEntryAdapter;
 import com.example.babylife.contracts.DiaperChangeContract;
 import com.example.babylife.contracts.FeedingLogContract;
+import com.example.babylife.contracts.SleepSessionContract;
 import com.example.babylife.helpers.SQLiteAddAFeedingHelper;
 import com.example.babylife.helpers.SQLiteDiaperHelper;
+import com.example.babylife.helpers.SQLiteSleepHelper;
 import com.example.babylife.sqlitefiles.SQLiteBabyName;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int REQUEST_CODE_POST_NOTIFICATION = 1002; // Arbitrary request code
+    private static final int REQUEST_CODE_POST_NOTIFICATION = 101; // Arbitrary request code
     private static final int NOTIFICATION_ID = 1;
     private static final String CHANNEL_ID = "baby_notification";
     private Spinner spinnerBabyName;
@@ -50,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rvSQLData;
     private SQLDiaperChangeAdapter adapter;
     private FeedingEntryAdapter feedingEntryAdapter;
+    private SleepEntryAdapter sleepAdapter;
     private SQLiteDiaperHelper helper;
 
     private SQLiteAddAFeedingHelper feedingHelper;
+    private SQLiteSleepHelper sleepHelper;
     private SQLiteBabyName dbHelper;
     private ImageView deleteTable;
     private Context context;
@@ -73,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // Request the permission
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, REQUEST_CODE_POST_NOTIFICATION);
+                return;
+            }
+        }
 
         spinnerBabyName = findViewById(R.id.spinnerBabyName);
         spinnerDataType = findViewById(R.id.spinnerSelectData);
@@ -89,8 +104,9 @@ public class MainActivity extends AppCompatActivity {
         deleteTable = findViewById(R.id.ivDeleteTable);
         context = this;
         feedingHelper = new SQLiteAddAFeedingHelper(this);
+       // sleepHelper = new SQLiteSleepHelper(this);
 //Setup Spinner logs
-        String[] logSelection = {"Diaper Log", "Feeding Log", "Sleep log", "Pumping log"};
+        String[] logSelection = {"Diaper Log", "Feeding Log", "Sleep Log", "Pumping Log"};
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, logSelection);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -107,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         // Initialize the adapter with context but no cursor yet
         adapter = new SQLDiaperChangeAdapter(this);
         feedingEntryAdapter = new FeedingEntryAdapter(this);
+
         rvSQLData.setAdapter(feedingEntryAdapter);
 
         // Initialize the database helper
@@ -135,6 +152,13 @@ public class MainActivity extends AppCompatActivity {
                     loadSQLiteData();
                     adapter.notifyDataSetChanged();
                 }
+                if(selectedItem.equals("Sleep Log")){
+                    sleepHelper = new SQLiteSleepHelper(context);
+                    sleepAdapter = new SleepEntryAdapter(context);
+                    rvSQLData.setAdapter(sleepAdapter);
+                    loadSleepData();
+                    sleepAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -157,8 +181,8 @@ public class MainActivity extends AppCompatActivity {
         btnAddSleep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "More coming soon!", Toast.LENGTH_LONG).show();
-
+                Intent i = new Intent(MainActivity.this, AddASleepingActivity.class);
+                startActivity(i);
 
             }
         });
@@ -168,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, BabyDataChart.class);
+                startActivity(i);
             }
         });
 
@@ -252,6 +277,33 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == REQUEST_CODE_POST_NOTIFICATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission was granted
+            } else {
+                // Permission was denied or request was cancelled
+            }
+        }
+
+        // Handle other permission results
+    }
+
+    private void loadSleepData() {
+        SQLiteDatabase db = sleepHelper.getReadableDatabase();
+
+        Cursor cursor = db.query(SleepSessionContract.SleepLogEntry.TABLE_NAME, null, null, null, null, null, null);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            Log.d("MainActivity", "Cursor has " + cursor.getCount() + " entries");
+            sleepAdapter.swapCursor(cursor);
+        } else {
+            Log.e("MainActivity", "Cursor is empty or null");
+        }
     }
 
     private void showTestNotification() {
@@ -391,5 +443,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.swapCursor(null);
         helper.close();
 }
+
 
 }

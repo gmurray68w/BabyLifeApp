@@ -49,6 +49,7 @@ public class AddAFeedingActivity extends AppCompatActivity {
    private String selectedDateTime;
     private String selectedDate;
     private String selectedTime;
+    private TextView tvNameF, tvDateF,tvTimeF,tvTypeF,tvNotesF,tvDurationF,tvAmountF;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,15 @@ public class AddAFeedingActivity extends AppCompatActivity {
         btnCancelFeed = findViewById(R.id.btnCancelFeeding);
         btnSaveFeed = findViewById(R.id.btnSaveFeeding);
         rgFeedingType = findViewById(R.id.rgFeedingType);
+
+        //Card code
+        tvNameF=findViewById(R.id.tv_feeding_entry_name_F);
+        tvDateF=findViewById(R.id.tv_feeding_date_entry_F);
+        tvTimeF=findViewById(R.id.tv_feeding_time_entry_F);
+        tvTypeF = findViewById(R.id.tv_feeding_type_entry_F);
+        tvNotesF = findViewById(R.id.tv_feeding_additional_notes_F);
+        tvDurationF = findViewById(R.id.tv_feeding_duration_entry_F);
+        tvAmountF = findViewById(R.id.tv_feeding_amount_entry_F);
         
         
         //Set ChildNameSpinner
@@ -230,6 +240,14 @@ public class AddAFeedingActivity extends AppCompatActivity {
                     "\nNotes: " + notes;
             tvInfoFeed.setText(infoText);
         }
+
+        tvNameF.setText(childName);
+        tvTypeF.setText(selectedFeedingTypeString);
+        tvDateF.setText(selectedDate);
+        tvTimeF.setText(selectedTime);
+        tvDurationF.setText(duration);
+        tvAmountF.setText(amount);
+        tvNotesF.setText(notes);
     }
 
 

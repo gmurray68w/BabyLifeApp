@@ -43,6 +43,8 @@ public class AddASleepingActivity extends AppCompatActivity {
     TextView tvSelectedDate, tvSelectedStartTime, tvSelectedEndTime, tvSleepInfo;
     private SQLiteBabyName dbNameHelper;
     String durationStr;
+
+    private TextView tvNameS, tvDateS,tvStartS,tvEndS,tvNotesS,tvDurationS;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,13 @@ public class AddASleepingActivity extends AppCompatActivity {
         tvSelectedStartTime = findViewById(R.id.tvSleepStartTimeText);
         tvSelectedEndTime = findViewById(R.id.tvSleepSelectedEndTIme);
         tvSleepInfo = findViewById(R.id.tvSleepNotesWhole);
-        
+
+        tvNameS = findViewById(R.id.tv_sleeping_entry_name_S);
+        tvDateS = findViewById(R.id.tv_sleeping_date_entry_S);
+        tvStartS = findViewById(R.id.tv_sleeping_start_time_S);
+        tvEndS = findViewById(R.id.tv_sleeping_end_time_S);
+        tvNotesS = findViewById(R.id.tv_sleeping_additional_notes_S);
+        tvDurationS = findViewById(R.id.tv_sleeping_duration_entry_S);
         //Set ChildName Spiner
         dbNameHelper= new SQLiteBabyName(this);
         loadBabyNames();
@@ -168,6 +176,13 @@ public class AddASleepingActivity extends AppCompatActivity {
 
             String sleepInfo = "Name = " + name + "\nDate= " + date + "\nStartTime: " + startTime + ",\nEndTime: " + endTime + "\nDuration: " + durationStr + "\nNotes=" + notes;
             tvSleepInfo.setText(sleepInfo);
+
+            tvNameS.setText(name);
+            tvDateS.setText(date);
+            tvStartS.setText(startTime);
+            tvEndS.setText(endTime);
+            tvDurationS.setText(durationStr);
+            tvNotesS.setText(notes);
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -145,6 +146,9 @@ public class NotificationActivity extends AppCompatActivity {
             // Add cases for other types if needed
             case "Diaper Change":
                 notificationIntent = new Intent(context,AddADiaperChange.class);
+                break;
+            case "Seeping":
+                notificationIntent = new Intent(context, AddASleepingActivity.class);
                 break;
             //TODO ADD CASES FOR FEEDING AND PUMPING WHEN COMPLETE.
             default:
@@ -288,7 +292,10 @@ public class NotificationActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             // Extract the notification type from the intent
-            String type = intent.getStringExtra("NOTIFICATION_TYPE");
+            if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+                Log.d("BootReceiver", "Device rebooted - rescheduling alarms");
+            }
+                String type = intent.getStringExtra("NOTIFICATION_TYPE");
             String frequency= intent.getStringExtra("NOTIFICATION_FREQUENCY");
             // Call the static method to show the notification
             NotificationActivity.showNotification(context,type,frequency);

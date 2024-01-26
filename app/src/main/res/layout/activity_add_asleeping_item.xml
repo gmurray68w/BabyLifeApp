@@ -33,7 +33,7 @@
                 app:srcCompat="@drawable/baby_sleeping_icon" />
 
             <TextView
-                android:id="@+id/tv_sleeping_entry_name"
+                android:id="@+id/tv_sleeping_entry_name_S"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -46,53 +46,53 @@
                 app:layout_constraintTop_toTopOf="@+id/iv_log_type_sleeping_image_entry" />
 
             <TextView
-                android:id="@+id/tv_sleeping_date_entry"
+                android:id="@+id/tv_sleeping_date_entry_S"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="11/19/23"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_sleeping_entry_name"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sleeping_entry_name_S"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_entry_name" />
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_entry_name_S" />
 
             <TextView
-                android:id="@+id/tv_sleeping_end_time"
+                android:id="@+id/tv_sleeping_end_time_S"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:text="11:08 PM"
-                app:layout_constraintBottom_toTopOf="@+id/tv_sleeping_date_entry"
+                app:layout_constraintBottom_toTopOf="@+id/tv_sleeping_date_entry_S"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_sleeping_additional_notes"
+                android:id="@+id/tv_sleeping_additional_notes_S"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:text="Notes:"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_sleeping_duration_entry" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_sleeping_duration_entry_S" />
 
             <TextView
-                android:id="@+id/tv_sleeping_start_time"
+                android:id="@+id/tv_sleeping_start_time_S"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10:30"
-                app:layout_constraintEnd_toStartOf="@+id/tv_sleeping_end_time"
-                app:layout_constraintStart_toEndOf="@+id/tv_sleeping_entry_name"
-                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_end_time" />
+                app:layout_constraintEnd_toStartOf="@+id/tv_sleeping_end_time_S"
+                app:layout_constraintStart_toEndOf="@+id/tv_sleeping_entry_name_S"
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_end_time_S" />
 
             <TextView
-                android:id="@+id/tv_sleeping_duration_entry"
+                android:id="@+id/tv_sleeping_duration_entry_S"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="38 m"
-                app:layout_constraintEnd_toEndOf="@+id/tv_sleeping_start_time"
-                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_date_entry" />
+                app:layout_constraintEnd_toEndOf="@+id/tv_sleeping_start_time_S"
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_date_entry_S" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -101,8 +101,8 @@
                 android:layout_marginStart="16dp"
                 android:text="Start:"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/tv_sleeping_entry_name"
-                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_start_time" />
+                app:layout_constraintStart_toEndOf="@+id/tv_sleeping_entry_name_S"
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_start_time_S" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -111,7 +111,7 @@
                 android:text="Duration"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView14"
-                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_duration_entry" />
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_duration_entry_S" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -120,7 +120,7 @@
                 android:text="Notes:"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView16"
-                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_additional_notes" />
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_additional_notes_S" />
 
             <TextView
                 android:id="@+id/textView18"
@@ -129,8 +129,8 @@
                 android:layout_marginStart="24dp"
                 android:text="End:"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/tv_sleeping_start_time"
-                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_end_time" />
+                app:layout_constraintStart_toEndOf="@+id/tv_sleeping_start_time_S"
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_end_time_S" />
 
             <TextView
                 android:id="@+id/textView25"
@@ -139,7 +139,7 @@
                 android:text="Date:"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView18"
-                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_date_entry" />
+                app:layout_constraintTop_toTopOf="@+id/tv_sleeping_date_entry_S" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

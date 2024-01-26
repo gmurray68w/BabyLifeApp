@@ -38,6 +38,8 @@ public class AddADiaperChange extends AppCompatActivity {
     private EditText babyChangeNotes;
     private SQLiteBabyName dbHelper;
     private SQLiteDiaperHelper diaperChangeDb;
+    private TextView tvTimeD, tvDateD, tvNotesD,tvTypeD;
+    private String date, time;
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,11 @@ public class AddADiaperChange extends AppCompatActivity {
         btnSelectDate = findViewById(R.id.btnSelectDate);
         radioGroup = findViewById(R.id.radioGroup);
         babyChangeNotes = findViewById(R.id.etBabyChangeNotes);
+
+        tvTimeD = findViewById(R.id.tv_time_entry_diaper);
+        tvDateD= findViewById(R.id.tv_date_entry_diaper);
+        tvNotesD = findViewById(R.id.tv_additional_notes_diaper);
+        tvTypeD = findViewById(R.id.tv_type_entry_diaper);
 
         tvInfo = findViewById(R.id.tvInfoDiaper);
         btnSave = findViewById(R.id.btnSaveDiaper);
@@ -120,8 +127,8 @@ public class AddADiaperChange extends AppCompatActivity {
         String notes = babyChangeNotes.getText().toString();
         if (selectedDateTime != null && !selectedDateTime.isEmpty()) {
             String[] dateTimeParts = selectedDateTime.split(" ");
-            String date = dateTimeParts[0];
-            String time = dateTimeParts.length > 1 ? dateTimeParts[1] : "";
+            date = dateTimeParts[0];
+            time = dateTimeParts.length > 1 ? dateTimeParts[1] : "";
             String logType = "Diaper Change";
 
             diaperChangeDb.insertDiaperChange(logType, childName, date, time, diaperType, notes);
@@ -155,11 +162,17 @@ public class AddADiaperChange extends AppCompatActivity {
                 "Diaper Type Not Selected";
         String notes = babyChangeNotes.getText().toString();
 
-        String infoText = "Child: " + childName + "\n" +
-                "Diaper Type: " + diaperType + "\n" +
-                "Date and Time: " + (selectedDateTime != null ? selectedDateTime : "Not Selected") + "\n" +
-                "Notes: " + notes;
-        tvInfo.setText(infoText);
+        //String infoText = "Child: " + childName + "\n" +
+        //        "Diaper Type: " + diaperType + "\n" +
+        //        "Date and Time: " + (selectedDateTime != null ? selectedDateTime : "Not Selected") + "\n" +
+        //        "Notes: " + notes;
+        //tvInfo.setText(infoText);
+
+        tvDateD.setText(date);
+        tvTimeD.setText(time);
+        tvTypeD.setText(diaperType);
+        tvNotesD.setText(notes);
+
     }
 
 

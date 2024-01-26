@@ -82,12 +82,12 @@ public class SleepEntryAdapter extends RecyclerView.Adapter<SleepEntryAdapter.Vi
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvEntryName = itemView.findViewById(R.id.tv_sleeping_entry_name);
-            tvDateEntry = itemView.findViewById(R.id.tv_sleeping_date_entry);
-            tvStartTimeEntry = itemView.findViewById(R.id.tv_sleeping_start_time);
-            tvEndTimeEntry = itemView.findViewById(R.id.tv_sleeping_end_time);
-            tvDuration = itemView.findViewById(R.id.tv_sleeping_duration_entry);
-            tvAdditionalNotesEntry = itemView.findViewById(R.id.tv_sleeping_additional_notes);
+            tvEntryName = itemView.findViewById(R.id.tv_sleeping_entry_name_S);
+            tvDateEntry = itemView.findViewById(R.id.tv_sleeping_date_entry_S);
+            tvStartTimeEntry = itemView.findViewById(R.id.tv_sleeping_start_time_S);
+            tvEndTimeEntry = itemView.findViewById(R.id.tv_sleeping_end_time_S);
+            tvDuration = itemView.findViewById(R.id.tv_sleeping_duration_entry_S);
+            tvAdditionalNotesEntry = itemView.findViewById(R.id.tv_sleeping_additional_notes_S);
             ivLogTypeImageEntry = itemView.findViewById(R.id.iv_log_type_sleeping_image_entry);
         }
     }

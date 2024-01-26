@@ -79,10 +79,10 @@ public class SQLDiaperChangeAdapter extends RecyclerView.Adapter<SQLDiaperChange
         ViewHolder(View itemView) {
             super(itemView);
             tvEntryName = itemView.findViewById(R.id.tv_entry_name);
-            tvDateEntry = itemView.findViewById(R.id.tv_date_entry);
-            tvTimeEntry = itemView.findViewById(R.id.tv_time_entry);
-            tvTypeEntry = itemView.findViewById(R.id.tv_type_entry);
-            tvAdditionalNotesEntry = itemView.findViewById(R.id.tv_additional_notes);
+            tvDateEntry = itemView.findViewById(R.id.tv_date_entry_diaper);
+            tvTimeEntry = itemView.findViewById(R.id.tv_time_entry_diaper);
+            tvTypeEntry = itemView.findViewById(R.id.tv_type_entry_diaper);
+            tvAdditionalNotesEntry = itemView.findViewById(R.id.tv_additional_notes_diaper);
             ivLogTypeImageEntry = itemView.findViewById(R.id.iv_log_type_image_entry);
         }
     }

@@ -86,13 +86,13 @@ public class FeedingEntryAdapter extends RecyclerView.Adapter<FeedingEntryAdapte
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvEntryName = itemView.findViewById(R.id.tv_feeding_entry_name);
-            tvDateEntry = itemView.findViewById(R.id.tv_feeding_date_entry);
-            tvTimeEntry = itemView.findViewById(R.id.tv_feeding_time_entry);
-            tvTypeEntry = itemView.findViewById(R.id.tv_feeding_type_entry);
-            tvDuration = itemView.findViewById(R.id.tv_feeding_duration_entry);
-            tvAmount = itemView.findViewById(R.id.tv_feeding_amount_entry);
-            tvAdditionalNotesEntry = itemView.findViewById(R.id.tv_feeding_additional_notes);
+            tvEntryName = itemView.findViewById(R.id.tv_feeding_entry_name_F);
+            tvDateEntry = itemView.findViewById(R.id.tv_feeding_date_entry_F);
+            tvTimeEntry = itemView.findViewById(R.id.tv_feeding_time_entry_F);
+            tvTypeEntry = itemView.findViewById(R.id.tv_feeding_type_entry_F);
+            tvDuration = itemView.findViewById(R.id.tv_feeding_duration_entry_F);
+            tvAmount = itemView.findViewById(R.id.tv_feeding_amount_entry_F);
+            tvAdditionalNotesEntry = itemView.findViewById(R.id.tv_feeding_additional_notes_F);
             ivLogTypeImageEntry = itemView.findViewById(R.id.iv_log_type_feeding_image_entry);
         }
     }

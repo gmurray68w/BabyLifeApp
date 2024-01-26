@@ -4,17 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/top_arch_shape"
     tools:context=".AddAFeedingActivity">
 
     <TextView
         android:id="@+id/tvNotesText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:text="Notes"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/etNotesFeed"
         app:layout_constraintEnd_toEndOf="@+id/textView22"
-        app:layout_constraintStart_toStartOf="@+id/textView22" />
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/tvAddFeeding"
@@ -22,6 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Add a Feeding"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,10 +36,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Name:"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAddFeeding" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Spinner
         android:id="@+id/spinnerFeedChildname"
@@ -49,61 +57,71 @@
         android:id="@+id/tvTypeFeeding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="Type:"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerFeedChildname" />
+        app:layout_constraintEnd_toEndOf="@+id/tvNameFeeding"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameFeeding" />
 
     <RadioGroup
         android:id="@+id/rgFeedingType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTypeFeeding"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTypeFeeding">
+        app:layout_constraintStart_toEndOf="@+id/tvTypeFeeding"
+        app:layout_constraintTop_toTopOf="@+id/tvTypeFeeding">
 
         <RadioButton
             android:id="@+id/rbBreastFeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Breast" />
+            android:text="Breast"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/rbBottleFeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bottle" />
+            android:text="Bottle"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
     </RadioGroup>
 
     <RadioGroup
         android:id="@+id/radioGroup3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTimeFeeding"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTimeFeeding">
+        app:layout_constraintStart_toEndOf="@+id/tvTimeFeeding"
+        app:layout_constraintTop_toTopOf="@+id/tvTimeFeeding">
 
         <Button
             android:id="@+id/rbTimeNowFeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Now" />
+            android:text="Now"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btnSelectFeedDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Date" />
+            android:text="Select Date"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
     </RadioGroup>
 
@@ -111,41 +129,48 @@
         android:id="@+id/tvTimeFeeding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="Time"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tvTypeFeeding"
-        app:layout_constraintStart_toStartOf="@+id/tvTypeFeeding"
         app:layout_constraintTop_toBottomOf="@+id/rgFeedingType" />
 
     <TextView
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="Duration"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tvTimeFeeding"
-        app:layout_constraintStart_toStartOf="@+id/tvTimeFeeding"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup3" />
 
     <EditText
         android:id="@+id/etDurationFeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="40"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView20"
+        app:layout_constraintStart_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toTopOf="@+id/textView20" />
 
     <TextView
         android:id="@+id/tvMinFeding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Minutes"
+        android:text="mins"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/etDurationFeed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etDurationFeed"
@@ -155,30 +180,36 @@
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="Amount"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textView20"
-        app:layout_constraintStart_toStartOf="@+id/textView20"
         app:layout_constraintTop_toBottomOf="@+id/etDurationFeed" />
 
     <EditText
         android:id="@+id/etAmountFeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="4"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView22"
+        app:layout_constraintStart_toEndOf="@+id/textView22"
+        app:layout_constraintTop_toTopOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ounces"
+        android:text="oz"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/etAmountFeed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etAmountFeed"
@@ -189,6 +220,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:layout_marginBottom="16dp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -201,6 +234,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="Save"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -208,23 +243,180 @@
         android:id="@+id/tvInfoFeeding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:text="Info:"
-        app:layout_constraintBottom_toTopOf="@+id/btnCancelFeeding"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNotesFeed" />
 
     <EditText
         android:id="@+id/etNotesFeed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="48dp"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="Great"
         android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNotesText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/etAmountFeed"
-        app:layout_constraintTop_toBottomOf="@+id/etAmountFeed" />
+        app:layout_constraintStart_toEndOf="@+id/textView22"
+        app:layout_constraintTop_toTopOf="@+id/tvNotesText" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvAddFeeding"
+        app:layout_constraintStart_toStartOf="@+id/tvAddFeeding"
+        app:layout_constraintTop_toBottomOf="@+id/tvAddFeeding"
+        app:srcCompat="@drawable/baby_bottle_sixty_four" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_feeding_entry"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSaveFeeding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_log_type_feeding_image_entry"
+                android:layout_width="46dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/babybottleicon" />
+
+            <TextView
+                android:id="@+id/tv_feeding_entry_name_F"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:maxLines="2"
+                android:text="Samuel M"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_log_type_feeding_image_entry"
+                app:layout_constraintStart_toEndOf="@+id/iv_log_type_feeding_image_entry"
+                app:layout_constraintTop_toTopOf="@+id/iv_log_type_feeding_image_entry" />
+
+            <TextView
+                android:id="@+id/tv_feeding_date_entry_F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="11/19/23"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_feeding_entry_name_F"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_feeding_entry_name_F" />
+
+            <TextView
+                android:id="@+id/tv_feeding_time_entry_F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="11:08 PM"
+                app:layout_constraintBottom_toTopOf="@+id/tv_feeding_date_entry_F"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_feeding_type_entry_F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Type"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_feeding_date_entry_F" />
+
+            <TextView
+                android:id="@+id/tv_feeding_additional_notes_F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Notes:"
+                app:layout_constraintEnd_toEndOf="@+id/tv_feeding_amount_entry_F"
+                app:layout_constraintTop_toBottomOf="@+id/tv_feeding_amount_entry_F" />
+
+            <TextView
+                android:id="@+id/tv_feeding_duration_entry_F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duration:"
+                app:layout_constraintEnd_toStartOf="@+id/tv_feeding_time_entry_F"
+                app:layout_constraintStart_toEndOf="@+id/tv_feeding_entry_name_F"
+                app:layout_constraintTop_toTopOf="@+id/tv_feeding_time_entry_F" />
+
+            <TextView
+                android:id="@+id/tv_feeding_amount_entry_F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount:"
+                app:layout_constraintEnd_toEndOf="@+id/tv_feeding_duration_entry_F"
+                app:layout_constraintTop_toTopOf="@+id/tv_feeding_date_entry_F" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Duration:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/tv_feeding_entry_name_F"
+                app:layout_constraintTop_toTopOf="@+id/tv_feeding_duration_entry_F" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView14"
+                app:layout_constraintTop_toTopOf="@+id/tv_feeding_amount_entry_F" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notes:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView16"
+                app:layout_constraintTop_toTopOf="@+id/tv_feeding_additional_notes_F" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="Time:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/tv_feeding_duration_entry_F"
+                app:layout_constraintTop_toTopOf="@+id/tv_feeding_time_entry_F" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type:"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/textView18"
+                app:layout_constraintTop_toTopOf="@+id/tv_feeding_type_entry_F" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

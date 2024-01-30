@@ -19,16 +19,25 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IInterface;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import android.Manifest;
+import android.widget.Toolbar;
 
 import com.example.babylife.adapters.FeedingEntryAdapter;
 import com.example.babylife.adapters.SQLDiaperChangeAdapter;
@@ -40,6 +49,7 @@ import com.example.babylife.helpers.SQLiteAddAFeedingHelper;
 import com.example.babylife.helpers.SQLiteDiaperHelper;
 import com.example.babylife.helpers.SQLiteSleepHelper;
 import com.example.babylife.sqlitefiles.SQLiteBabyName;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.List;
 
@@ -50,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private Spinner spinnerBabyName;
     private Spinner spinnerDataType;
     private String name, bday;
-    private Button btnAddAFeeding, btnAddDiaperChange, btnPumpingSession, btnViewData, btnAddChild, btnViewCharts,
-            btnPhotoProgress, btnLogin, btnProfile, btnAddSleep, btnNotification;
+    private Button btnAddAFeeding, btnAddDiaperChange, btnPumpingSession, btnAddChild, btnAddSleep;
 
     private RecyclerView rvSQLData;
     private SQLDiaperChangeAdapter adapter;
@@ -64,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
     private SQLiteBabyName dbHelper;
     private ImageView deleteTable;
     private Context context;
+    private MaterialToolbar mTb;
+    private ImageButton ibAddChild ,ibNotification;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -71,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Check if notification is allowed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
@@ -89,22 +101,22 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        spinnerBabyName = findViewById(R.id.spinnerBabyName);
+
+
         spinnerDataType = findViewById(R.id.spinnerSelectData);
         btnAddAFeeding = findViewById(R.id.btnAddAFeeding);
         btnAddDiaperChange = findViewById(R.id.btnAddaDiaperChange);
         btnPumpingSession = findViewById(R.id.btnPumpingSession);
-        btnViewData = findViewById(R.id.btnViewData);
-        btnViewCharts = findViewById(R.id.btnChart);
-        btnAddChild = findViewById(R.id.btnAddBaby);
-        btnNotification = findViewById(R.id.btnNotificationActivity);
-        btnPhotoProgress = findViewById(R.id.btnPhotoGallery);
+
+         btnAddChild = findViewById(R.id.btnAddBaby);
+
         rvSQLData = findViewById(R.id.rv_latest_data);
         btnAddSleep = findViewById(R.id.btnSleepAdd);
         deleteTable = findViewById(R.id.ivDeleteTable);
         context = this;
         feedingHelper = new SQLiteAddAFeedingHelper(this);
        // sleepHelper = new SQLiteSleepHelper(this);
+        dbHelper = new SQLiteBabyName(this);
 //Setup Spinner logs
         String[] logSelection = {"Diaper Log", "Feeding Log", "Sleep Log", "Pumping Log"};
 
@@ -112,10 +124,40 @@ public class MainActivity extends AppCompatActivity {
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDataType.setAdapter(spinnerAdapter);
 
-        //Load names for Children from db
+
+
+
+        mTb = findViewById(R.id.materialToolbar);
+        setSupportActionBar(mTb);
+
+        // Set the title for the Toolbar
+        getSupportActionBar().setTitle("Baby Life");
+
+        // Create a new LinearLayout to hold the spinner
+        LinearLayout rightContainer = new LinearLayout(this);
+        rightContainer.setOrientation(LinearLayout.HORIZONTAL);
+        Toolbar.LayoutParams layoutParamsContainer = new Toolbar.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, // This will wrap the content
+                LinearLayout.LayoutParams.MATCH_PARENT
+        );
+        layoutParamsContainer.gravity = Gravity.END; // Align to the right end
+        rightContainer.setLayoutParams(layoutParamsContainer);
+
+        // Initialize and configure the spinner
+        spinnerBabyName = new Spinner(this);
         dbHelper = new SQLiteBabyName(this);
-        updateUIChildData();
-        showTestNotification();
+        updateUIChildData(); // Ensure this method configures the spinner
+        LinearLayout.LayoutParams spinnerParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        spinnerParams.gravity = Gravity.CENTER_VERTICAL;
+        rightContainer.addView(spinnerBabyName, spinnerParams);
+
+        // Add the rightContainer to the Toolbar
+        mTb.addView(rightContainer);
+
+        // showTestNotification();
 
         //Setup RV for sqlite data
         rvSQLData.setLayoutManager(new LinearLayoutManager(this));
@@ -188,22 +230,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //View charts listener
-        btnViewCharts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, BabyDataChart.class);
-                startActivity(i);
-            }
-        });
 
-        //View photos
-        btnPhotoProgress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, CameraPhotoDisplay.class);
-                startActivity(i);
-            }
-        });
+
+
 
         //Add a child button
         btnAddChild.setOnClickListener(new View.OnClickListener() {
@@ -214,14 +243,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //View data button
-        btnViewData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ChildDataView.class);
-                startActivity(i);
-            }
-        });
 
         //Add pumping session data
         //TODO: ADD LAYOUT AND CONFIGURE TABLES
@@ -262,21 +283,8 @@ public class MainActivity extends AppCompatActivity {
 
         //View Charts of data
         //TODO Configure with current data
-        btnViewCharts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, BabyDataChart.class);
-                startActivity(i);
-            }
-        });
 
-        btnNotification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, NotificationActivity.class);
-                startActivity(i);
-            }
-        });
+
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -402,6 +410,7 @@ public class MainActivity extends AppCompatActivity {
         long newRowId2 = db.insert(ChildLogContract.DiaperLogEntry.TABLE_NAME, null, values);
     }*/
 
+
     //When resuming the activity. This updates the information to it's current state includes additions and deletions.
     @Override
     protected void onResume(){
@@ -430,10 +439,10 @@ public class MainActivity extends AppCompatActivity {
         btnAddAFeeding.setVisibility(visibility);
         btnAddDiaperChange.setVisibility(visibility);
         btnPumpingSession.setVisibility(visibility);
-        btnViewData.setVisibility(visibility);
-        btnPhotoProgress.setVisibility(visibility);
+
+
         btnAddSleep.setVisibility(visibility);
-        btnViewCharts.setVisibility(visibility);
+
     }
 
     //on exit
@@ -444,5 +453,54 @@ public class MainActivity extends AppCompatActivity {
         helper.close();
 }
 
+    // This method will initialize the toolbar menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        return true;
+    }
 
+    // This method will handle the actions on the toolbar menu items
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_more) {
+            // Find the current view for the "More" item to anchor the popup menu
+            View view = findViewById(R.id.action_more);
+            if (view == null) {
+                view = mTb.findViewById(R.id.action_more);
+            }
+            showPopup(view);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void showPopup(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.options_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                // Handle clicks on the popup menu items here
+                int id = item.getItemId();
+                if(id == R.id.action_bar_notification){
+                    Intent i = new Intent(MainActivity.this, NotificationActivity.class);
+                    startActivity(i);
+                } else if (id == R.id.action_photo_progress) {
+                    // Handle "Photo Progress" action
+                    Intent i = new Intent(MainActivity.this, CameraPhotoDisplay.class);
+                    startActivity(i);
+                } else if (id == R.id.action_view_data) {
+                    Intent i = new Intent(MainActivity.this, ChildDataView.class);
+                    startActivity(i);
+
+                } else if (id == R.id.action_view_charts) {
+                    Intent i = new Intent(MainActivity.this, BabyDataChart.class);
+                    startActivity(i);
+                }
+                return true;
+            }
+        });
+        popupMenu.show();
+    }
 }

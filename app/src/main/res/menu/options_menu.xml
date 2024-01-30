@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/action_bar_add_child"
+            android:title="@string/add_child"/>
+        <item android:id="@+id/action_bar_notification"
+            android:title="@string/notifications_set"/>
+        <item android:id="@+id/action_photo_progress"
+            android:title="@string/photo_progress" />
+        <item android:id="@+id/action_view_data"
+            android:title="@string/view_data" />
+        <item android:id="@+id/action_view_charts"
+            android:title="@string/view_charts" />
+    </menu>

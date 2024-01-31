@@ -288,7 +288,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/iv_log_type_feeding_image_entry"
+                android:id="@+id/iv_log_type_pumping_image_entry"
                 android:layout_width="46dp"
                 android:layout_height="54dp"
                 android:layout_marginStart="8dp"
@@ -300,7 +300,7 @@
                 app:srcCompat="@drawable/babybottleicon" />
 
             <TextView
-                android:id="@+id/tv_feeding_entry_name_F"
+                android:id="@+id/tv_pumping_entry_name_F"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -308,67 +308,67 @@
                 android:text="Samuel M"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_log_type_feeding_image_entry"
-                app:layout_constraintStart_toEndOf="@+id/iv_log_type_feeding_image_entry"
-                app:layout_constraintTop_toTopOf="@+id/iv_log_type_feeding_image_entry" />
+                app:layout_constraintBottom_toBottomOf="@+id/iv_log_type_pumping_image_entry"
+                app:layout_constraintStart_toEndOf="@+id/iv_log_type_pumping_image_entry"
+                app:layout_constraintTop_toTopOf="@+id/iv_log_type_pumping_image_entry" />
 
             <TextView
-                android:id="@+id/tv_feeding_date_entry_F"
+                android:id="@+id/tv_pumping_date_entry_P"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="11/19/23"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_feeding_entry_name_F"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_pumping_entry_name_F"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_feeding_entry_name_F" />
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_entry_name_F" />
 
             <TextView
-                android:id="@+id/tv_feeding_time_entry_F"
+                android:id="@+id/tv_pumping_time_entry_P"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:text="11:08 PM"
-                app:layout_constraintBottom_toTopOf="@+id/tv_feeding_date_entry_F"
+                app:layout_constraintBottom_toTopOf="@+id/tv_pumping_date_entry_P"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_feeding_type_entry_F"
+                android:id="@+id/tv_pumping_side_entry_P"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:text="Type"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_feeding_date_entry_F" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_pumping_date_entry_P" />
 
             <TextView
-                android:id="@+id/tv_feeding_additional_notes_F"
+                android:id="@+id/tv_pumping_save_P"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Notes:"
-                app:layout_constraintEnd_toEndOf="@+id/tv_feeding_amount_entry_F"
-                app:layout_constraintTop_toBottomOf="@+id/tv_feeding_amount_entry_F" />
+                app:layout_constraintEnd_toEndOf="@+id/tv_pumping_amount_entry_P"
+                app:layout_constraintTop_toBottomOf="@+id/tv_pumping_amount_entry_P" />
 
             <TextView
-                android:id="@+id/tv_feeding_duration_entry_F"
+                android:id="@+id/tv_pumping_duration_entry_F"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Duration:"
-                app:layout_constraintEnd_toStartOf="@+id/tv_feeding_time_entry_F"
-                app:layout_constraintStart_toEndOf="@+id/tv_feeding_entry_name_F"
-                app:layout_constraintTop_toTopOf="@+id/tv_feeding_time_entry_F" />
+                app:layout_constraintEnd_toStartOf="@+id/tv_pumping_time_entry_P"
+                app:layout_constraintStart_toEndOf="@+id/tv_pumping_entry_name_F"
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_time_entry_P" />
 
             <TextView
-                android:id="@+id/tv_feeding_amount_entry_F"
+                android:id="@+id/tv_pumping_amount_entry_P"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Amount:"
-                app:layout_constraintEnd_toEndOf="@+id/tv_feeding_duration_entry_F"
-                app:layout_constraintTop_toTopOf="@+id/tv_feeding_date_entry_F" />
+                app:layout_constraintEnd_toEndOf="@+id/tv_pumping_duration_entry_F"
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_date_entry_P" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -377,8 +377,8 @@
                 android:layout_marginStart="16dp"
                 android:text="Duration:"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/tv_feeding_entry_name_F"
-                app:layout_constraintTop_toTopOf="@+id/tv_feeding_duration_entry_F" />
+                app:layout_constraintStart_toEndOf="@+id/tv_pumping_entry_name_F"
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_duration_entry_F" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -387,7 +387,7 @@
                 android:text="Amount:"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView14"
-                app:layout_constraintTop_toTopOf="@+id/tv_feeding_amount_entry_F" />
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_amount_entry_P" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -396,7 +396,7 @@
                 android:text="Notes:"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView16"
-                app:layout_constraintTop_toTopOf="@+id/tv_feeding_additional_notes_F" />
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_save_P" />
 
             <TextView
                 android:id="@+id/textView18"
@@ -405,17 +405,17 @@
                 android:layout_marginStart="24dp"
                 android:text="Time:"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/tv_feeding_duration_entry_F"
-                app:layout_constraintTop_toTopOf="@+id/tv_feeding_time_entry_F" />
+                app:layout_constraintStart_toEndOf="@+id/tv_pumping_duration_entry_F"
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_time_entry_P" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/tv_pumping_entry_saved_P"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Type:"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView18"
-                app:layout_constraintTop_toTopOf="@+id/tv_feeding_type_entry_F" />
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_side_entry_P" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

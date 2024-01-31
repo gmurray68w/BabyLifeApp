@@ -6,25 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
+    <ImageView
         android:id="@+id/btnAddAFeeding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="84dp"
+        android:layout_height="62dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+
+        android:cropToPadding="false"
+        android:scaleType="centerInside"
         android:text="@string/btnAddFeeding"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
+        tools:src="@drawable/babybottleicon" />
 
-    <Button
+    <ImageView
         android:id="@+id/btnPumpingSession"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="84dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/breastfeeding_icon"
         android:text="@string/btnAddPump"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddaDiaperChange" />
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
 
 
     <Button
@@ -36,33 +41,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <ImageView
         android:id="@+id/btnAddaDiaperChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_width="84dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="8dp"
         android:text="Diaper Change"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnAddAFeeding" />
+        app:layout_constraintEnd_toStartOf="@+id/btnPumpingSession"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toEndOf="@+id/btnAddAFeeding"
+        app:layout_constraintTop_toTopOf="@+id/btnAddAFeeding"
+        app:srcCompat="@drawable/diaper" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_latest_data"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/btnAddBaby"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerSelectData" />
 
-    <Button
+    <ImageView
         android:id="@+id/btnSleepAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_width="84dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/baby_sleeping_icon"
         android:text="Sleep "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnPumpingSession" />
+        app:layout_constraintEnd_toStartOf="@+id/btnPumpingSession"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toEndOf="@+id/btnAddAFeeding"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
 
 
     <ImageView
@@ -77,11 +89,11 @@
         android:id="@+id/spinnerSelectData"
         android:layout_width="344dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toStartOf="@+id/ivDeleteTable"
         app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPumpingSession" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar"
@@ -96,5 +108,43 @@
 >
 
     </com.google.android.material.appbar.MaterialToolbar>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feeding"
+        app:layout_constraintEnd_toEndOf="@+id/btnAddAFeeding"
+        app:layout_constraintStart_toStartOf="@+id/btnAddAFeeding"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddAFeeding" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diaper"
+        app:layout_constraintEnd_toEndOf="@+id/btnAddaDiaperChange"
+        app:layout_constraintHorizontal_bias="0.64"
+        app:layout_constraintStart_toEndOf="@+id/btnAddAFeeding"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddaDiaperChange" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sleep"
+        app:layout_constraintEnd_toEndOf="@+id/btnSleepAdd"
+        app:layout_constraintHorizontal_bias="0.57"
+        app:layout_constraintStart_toEndOf="@+id/btnAddaDiaperChange"
+        app:layout_constraintTop_toBottomOf="@+id/btnSleepAdd" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pumping"
+        app:layout_constraintEnd_toEndOf="@+id/btnPumpingSession"
+        app:layout_constraintStart_toStartOf="@+id/btnPumpingSession"
+        app:layout_constraintTop_toBottomOf="@+id/btnPumpingSession" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

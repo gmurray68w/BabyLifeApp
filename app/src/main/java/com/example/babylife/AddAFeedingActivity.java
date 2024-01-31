@@ -70,13 +70,13 @@ public class AddAFeedingActivity extends AppCompatActivity {
         rgFeedingType = findViewById(R.id.rgFeedingType);
 
         //Card code
-        tvNameF=findViewById(R.id.tv_feeding_entry_name_F);
-        tvDateF=findViewById(R.id.tv_feeding_date_entry_F);
-        tvTimeF=findViewById(R.id.tv_feeding_time_entry_F);
-        tvTypeF = findViewById(R.id.tv_feeding_type_entry_F);
-        tvNotesF = findViewById(R.id.tv_feeding_additional_notes_F);
-        tvDurationF = findViewById(R.id.tv_feeding_duration_entry_F);
-        tvAmountF = findViewById(R.id.tv_feeding_amount_entry_F);
+        tvNameF=findViewById(R.id.tv_pumping_entry_name_F);
+        tvDateF=findViewById(R.id.tv_pumping_date_entry_P);
+        tvTimeF=findViewById(R.id.tv_pumping_time_entry_P);
+        tvTypeF = findViewById(R.id.tv_pumping_side_entry_P);
+        tvNotesF = findViewById(R.id.tv_pumping_save_P);
+        tvDurationF = findViewById(R.id.tv_pumping_duration_entry_F);
+        tvAmountF = findViewById(R.id.tv_pumping_amount_entry_P);
         
         
         //Set ChildNameSpinner

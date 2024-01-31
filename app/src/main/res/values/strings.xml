@@ -26,7 +26,6 @@
     <string name="add_child">Add Child</string>
 
 
-
     <string-array name="notification_types_array">
         <item>Diaper Change</item>
         <item>Sleep</item>

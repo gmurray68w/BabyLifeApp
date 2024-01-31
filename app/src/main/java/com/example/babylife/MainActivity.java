@@ -40,11 +40,14 @@ import android.Manifest;
 import android.widget.Toolbar;
 
 import com.example.babylife.adapters.FeedingEntryAdapter;
+import com.example.babylife.adapters.PumpingSessionAdapter;
 import com.example.babylife.adapters.SQLDiaperChangeAdapter;
 import com.example.babylife.adapters.SleepEntryAdapter;
 import com.example.babylife.contracts.DiaperChangeContract;
 import com.example.babylife.contracts.FeedingLogContract;
+import com.example.babylife.contracts.PumpingSessionContract;
 import com.example.babylife.contracts.SleepSessionContract;
+import com.example.babylife.helpers.PumpingSessionHelper;
 import com.example.babylife.helpers.SQLiteAddAFeedingHelper;
 import com.example.babylife.helpers.SQLiteDiaperHelper;
 import com.example.babylife.helpers.SQLiteSleepHelper;
@@ -60,8 +63,9 @@ public class MainActivity extends AppCompatActivity {
     private Spinner spinnerBabyName;
     private Spinner spinnerDataType;
     private String name, bday;
-    private Button btnAddAFeeding, btnAddDiaperChange, btnPumpingSession, btnAddChild, btnAddSleep;
+    private Button  btnAddChild;
 
+    private ImageView btnAddDiaperChange, btnPumpingSession, btnAddSleep, btnAddAFeeding;
     private RecyclerView rvSQLData;
     private SQLDiaperChangeAdapter adapter;
     private FeedingEntryAdapter feedingEntryAdapter;
@@ -71,11 +75,14 @@ public class MainActivity extends AppCompatActivity {
     private SQLiteAddAFeedingHelper feedingHelper;
     private SQLiteSleepHelper sleepHelper;
     private SQLiteBabyName dbHelper;
+    private PumpingSessionHelper pumpingHelper;
+    private PumpingSessionAdapter pumpingAdapter;
     private ImageView deleteTable;
     private Context context;
     private MaterialToolbar mTb;
     private ImageButton ibAddChild ,ibNotification;
 
+    private String currentSelectedTable;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,16 +111,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         spinnerDataType = findViewById(R.id.spinnerSelectData);
-        btnAddAFeeding = findViewById(R.id.btnAddAFeeding);
+        btnAddAFeeding = findViewById(R.id.btnBottleFeeding);
         btnAddDiaperChange = findViewById(R.id.btnAddaDiaperChange);
         btnPumpingSession = findViewById(R.id.btnPumpingSession);
-
+        btnAddSleep = findViewById(R.id.btnSleepAdd);
          btnAddChild = findViewById(R.id.btnAddBaby);
 
         rvSQLData = findViewById(R.id.rv_latest_data);
-        btnAddSleep = findViewById(R.id.btnSleepAdd);
+
         deleteTable = findViewById(R.id.ivDeleteTable);
         context = this;
+        pumpingAdapter = new PumpingSessionAdapter(this);
         feedingHelper = new SQLiteAddAFeedingHelper(this);
        // sleepHelper = new SQLiteSleepHelper(this);
         dbHelper = new SQLiteBabyName(this);
@@ -179,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                currentSelectedTable = adapterView.getItemAtPosition(i).toString();
                 String selectedItem = adapterView.getItemAtPosition(i).toString();
 
                 if (selectedItem.equals("Feeding Log")) {
@@ -201,6 +210,13 @@ public class MainActivity extends AppCompatActivity {
                     loadSleepData();
                     sleepAdapter.notifyDataSetChanged();
                 }
+                if(selectedItem.equals("Pumping Log")){
+                    pumpingHelper = new PumpingSessionHelper(context);
+                    pumpingAdapter = new PumpingSessionAdapter(context);
+                    rvSQLData.setAdapter(pumpingAdapter);
+                    loadPumpingData();
+                    pumpingAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -209,14 +225,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         //Delete the table entries to start over with an empty sqlite table
         deleteTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                helper.deleteAllEntries(DiaperChangeContract.DiaperLogEntry.TABLE_NAME);
-                loadSQLiteData();
+                switch (currentSelectedTable) {
+                    case "Feeding Log":
+                        // Assuming you have a FeedingLogHelper
+                        feedingHelper.deleteAllEntries(FeedingLogContract.FeedingLogEntry.TABLE_NAME);
+                        break;
+                    case "Diaper Log":
+                        helper.deleteAllEntries(DiaperChangeContract.DiaperLogEntry.TABLE_NAME);
+                        break;
+                    case "Sleep Log":
+                        // Assuming you have a SleepLogHelper
+                        sleepHelper.deleteAllEntries(SleepSessionContract.SleepLogEntry.TABLE_NAME);
+                        break;
+                    case "Pumping Log":
+                        pumpingHelper.deleteAllEntries(PumpingSessionContract.PumpingLogEntry.TABLE_NAME);
+                        break;
+                    default:
+                        // Handle the default case or show an error
+                        Log.e("DeleteAction", "No table selected or unrecognized table.");
+                        break;
+                }
+
+                // After deletion, reload the appropriate data
+                switch (currentSelectedTable) {
+                    case "Feeding Log":
+                        loadFeedingData();
+                        break;
+                    case "Diaper Log":
+                        loadSQLiteData();
+                        break;
+                    case "Sleep Log":
+                        loadSleepData();
+                        break;
+                    case "Pumping Log":
+                        loadPumpingData();
+                        break;
+                }
+
+                // Update UI
                 updateUIChildData();
             }
+
         });
 
         //Setup Button navigation
@@ -249,7 +303,8 @@ public class MainActivity extends AppCompatActivity {
         btnPumpingSession.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(MainActivity.this, AddAPumpingSessionActivity.class);
+                startActivity(i);
             }
         });
 
@@ -271,21 +326,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Add a pumping session entry
-        //TODO: LAyouts and configure
-        btnPumpingSession.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Toast.makeText(MainActivity.this, "More coming soon!", Toast.LENGTH_LONG).show();
-            }
-        });
 
         //View Charts of data
-        //TODO Configure with current data
 
 
     }
+
+    private void loadPumpingData() {
+        SQLiteDatabase db = pumpingHelper.getReadableDatabase();
+        String sortOrder = PumpingSessionContract.PumpingLogEntry.COLUMN_DATE + " DESC";
+        Cursor cursor = db.query(PumpingSessionContract.PumpingLogEntry.TABLE_NAME, null, null, null, null, null, sortOrder);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            Log.d("MainActivity", "Cursor has " + cursor.getCount() + " entries");
+            pumpingAdapter.swapCursor(cursor);
+        } else {
+            Log.e("MainActivity", "Cursor is empty or null");
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

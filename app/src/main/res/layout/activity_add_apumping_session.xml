@@ -4,14 +4,164 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddAPumpingSessionActivity">
+    tools:context=".AddAPumpingSessionActivity"
+    android:background="@drawable/top_arch_shape">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_feeding_entry"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCancelPumping"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_log_type_pumping_image_entry"
+                android:layout_width="46dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/breastfeeding_icon" />
+
+            <TextView
+                android:id="@+id/tv_pumping_entry_name_F"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:maxLines="2"
+                android:text="Samuel M"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_log_type_pumping_image_entry"
+                app:layout_constraintStart_toEndOf="@+id/iv_log_type_pumping_image_entry"
+                app:layout_constraintTop_toTopOf="@+id/iv_log_type_pumping_image_entry" />
+
+            <TextView
+                android:id="@+id/tv_pumping_date_entry_P"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="11/19/23"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_pumping_entry_name_F"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_entry_name_F" />
+
+            <TextView
+                android:id="@+id/tv_pumping_time_entry_P"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="11:08 PM"
+                app:layout_constraintBottom_toTopOf="@+id/tv_pumping_date_entry_P"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_pumping_side_entry_P"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Type"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_pumping_date_entry_P" />
+
+            <TextView
+                android:id="@+id/tv_pumping_total_amount_P"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Notes:"
+                app:layout_constraintEnd_toEndOf="@+id/tv_pumping_amount_entry_P"
+                app:layout_constraintTop_toBottomOf="@+id/tv_pumping_amount_entry_P" />
+
+            <TextView
+                android:id="@+id/tv_pumping_duration_entry_F"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duration:"
+                app:layout_constraintEnd_toStartOf="@+id/tv_pumping_time_entry_P"
+                app:layout_constraintStart_toEndOf="@+id/tv_pumping_entry_name_F"
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_time_entry_P" />
+
+            <TextView
+                android:id="@+id/tv_pumping_amount_entry_P"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount:"
+                app:layout_constraintEnd_toEndOf="@+id/tv_pumping_duration_entry_F"
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_date_entry_P" />
+
+            <TextView
+                android:id="@+id/tv_pumping_entry_saved_P"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saved:"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/textView18"
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_side_entry_P" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Duration:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/tv_pumping_entry_name_F"
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_duration_entry_F" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView14"
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_amount_entry_P" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView16"
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_total_amount_P" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="Time:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/tv_pumping_duration_entry_F"
+                app:layout_constraintTop_toTopOf="@+id/tv_pumping_time_entry_P" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textView32"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:gravity="center_horizontal"
+        android:text="Add a Pumping \nSession"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,16 +171,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="24dp"
         android:text="Name:"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView32" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <Spinner
         android:id="@+id/spinner_baby_name_pumping"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView33"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView33" />
@@ -41,7 +195,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Time:"
-        app:layout_constraintStart_toStartOf="@+id/textView33"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView33"
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
     <Button
@@ -50,6 +206,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:text="Date"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView34"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView34" />
@@ -60,6 +218,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="Now"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/btnChooseDatePumping"
         app:layout_constraintEnd_toStartOf="@+id/btnChooseDatePumping"
         app:layout_constraintTop_toTopOf="@+id/btnChooseDatePumping" />
@@ -70,7 +230,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Duration:"
-        app:layout_constraintStart_toStartOf="@+id/textView34"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView34"
         app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
     <EditText
@@ -78,11 +240,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:gravity="center_horizontal"
+        android:hint="20"
         android:inputType="text"
-        android:text="Name"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView35"
         app:layout_constraintEnd_toStartOf="@+id/textView36"
-        app:layout_constraintStart_toEndOf="@+id/textView35"
         app:layout_constraintTop_toTopOf="@+id/textView35" />
 
     <TextView
@@ -90,10 +254,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:gravity="center_horizontal"
         android:text="mins"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/etDurationAmtPumping"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rbNowTimePumping" />
+        app:layout_constraintTop_toTopOf="@+id/etDurationAmtPumping" />
 
     <TextView
         android:id="@+id/textView37"
@@ -101,7 +268,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Amount:"
-        app:layout_constraintStart_toStartOf="@+id/textView35"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView35"
         app:layout_constraintTop_toBottomOf="@+id/textView35" />
 
     <EditText
@@ -109,10 +278,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:gravity="center_horizontal"
+        android:hint="5"
         android:inputType="number"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView37"
-        app:layout_constraintEnd_toStartOf="@+id/textView38"
-        app:layout_constraintStart_toEndOf="@+id/textView37"
+        app:layout_constraintEnd_toEndOf="@+id/etDurationAmtPumping"
         app:layout_constraintTop_toTopOf="@+id/textView37" />
 
     <TextView
@@ -121,6 +293,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="oz"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/etAmountPumping"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDurationAmtPumping" />
@@ -130,6 +304,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Right"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/etAmountPumping"
         app:layout_constraintTop_toTopOf="@+id/rbLeft" />
 
@@ -138,6 +314,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Left"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView39"
         app:layout_constraintStart_toStartOf="@+id/etAmountPumping"
         app:layout_constraintTop_toTopOf="@+id/textView39" />
@@ -147,8 +325,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Side"
-        app:layout_constraintStart_toStartOf="@+id/textView37"
+        android:text="Side:"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView37"
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
     <CheckBox
@@ -156,9 +336,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Save"
+        android:text="Save in freezer"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/rbRight"
-        app:layout_constraintStart_toStartOf="@+id/etAmountPumping"
+        app:layout_constraintStart_toStartOf="@+id/rbLeft"
         app:layout_constraintTop_toBottomOf="@+id/rbLeft" />
 
     <Button
@@ -167,7 +349,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Button"
+        android:text="Save"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -178,6 +362,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:text="Cancel"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -187,7 +373,18 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="TextView"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/btnCancelPumping"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="107dp"
+        android:layout_height="105dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView32"
+        app:layout_constraintStart_toStartOf="@+id/textView32"
+        app:layout_constraintTop_toBottomOf="@+id/textView32"
+        app:srcCompat="@drawable/breastfeeding_icon_modified" />
 </androidx.constraintlayout.widget.ConstraintLayout>

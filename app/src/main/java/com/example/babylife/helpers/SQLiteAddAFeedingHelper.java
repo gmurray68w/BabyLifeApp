@@ -54,7 +54,7 @@ public class SQLiteAddAFeedingHelper extends SQLiteOpenHelper {
     }
     public void deleteAllEntries(String tableName){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM" + tableName);
+        db.execSQL("DELETE FROM " + tableName);
         db.close();
     }
     @Override

@@ -26,7 +26,7 @@ public class CameraPhotoDisplay extends AppCompatActivity {
     private int currentImageViewId;
     private final Map<Integer, String> imageViewIdToKeyMap = new HashMap<>();
 
-    ImageView ivMonth1, ivMonth2, ivMonth3, ivMonth4;
+    private ImageView ivMonth1, ivMonth2, ivMonth4, ivMonth8, ivMonth12, ivMonth24;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,25 +34,33 @@ public class CameraPhotoDisplay extends AppCompatActivity {
         setContentView(R.layout.activity_camera_photo_display);
         ivMonth1 = findViewById(R.id.ivMonth1);
         ivMonth2 = findViewById(R.id.ivMonth2);
-        ivMonth3 = findViewById(R.id.ivMonth3);
-        ivMonth4 = findViewById(R.id.ivMonth5);
-
+        ivMonth4 = findViewById(R.id.ivMonth4);
+        ivMonth8 = findViewById(R.id.ivMonth8);
+        ivMonth12 = findViewById(R.id.ivMonth12);
+        ivMonth24 = findViewById(R.id.ivMonth24);
         // Populate the HashMap
         imageViewIdToKeyMap.put(R.id.ivMonth1, "ivMonth1");
         imageViewIdToKeyMap.put(R.id.ivMonth2, "ivMonth2");
-        imageViewIdToKeyMap.put(R.id.ivMonth3, "ivMonth3");
-        imageViewIdToKeyMap.put(R.id.ivMonth5, "ivMonth4");
+        imageViewIdToKeyMap.put(R.id.ivMonth4, "ivMonth4");
+        imageViewIdToKeyMap.put(R.id.ivMonth8, "ivMonth8");
+        imageViewIdToKeyMap.put(R.id.ivMonth12, "ivMonth12");
+        imageViewIdToKeyMap.put(R.id.ivMonth24, "ivMonth24");
 
-        ivMonth1.setOnClickListener(view -> onImageViewClicked(view));
-        ivMonth2.setOnClickListener(view -> onImageViewClicked(view));
-        ivMonth3.setOnClickListener(view -> onImageViewClicked(view));
-        ivMonth4.setOnClickListener(view -> onImageViewClicked(view));
+        // Set onClickListeners
+        ivMonth1.setOnClickListener(this::onImageViewClicked);
+        ivMonth2.setOnClickListener(this::onImageViewClicked);
+        ivMonth4.setOnClickListener(this::onImageViewClicked);
+        ivMonth8.setOnClickListener(this::onImageViewClicked);
+        ivMonth12.setOnClickListener(this::onImageViewClicked);
+        ivMonth24.setOnClickListener(this::onImageViewClicked);
 
         SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         loadImageView(R.id.ivMonth1, prefs);
         loadImageView(R.id.ivMonth2, prefs);
-        loadImageView(R.id.ivMonth3, prefs);
-        loadImageView(R.id.ivMonth5, prefs);
+        loadImageView(R.id.ivMonth4, prefs);
+        loadImageView(R.id.ivMonth8, prefs);
+        loadImageView(R.id.ivMonth12, prefs);
+        loadImageView(R.id.ivMonth24, prefs);
     }
 
  /*   private String getPreferenceKey(int imageViewId) {

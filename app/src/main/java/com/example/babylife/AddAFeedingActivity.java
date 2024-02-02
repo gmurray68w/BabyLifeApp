@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -253,14 +255,31 @@ public class AddAFeedingActivity extends AppCompatActivity {
 
 
     private void loadBabyNames() {
-        List<String> childNames = dbNameHelper.getAllChildNames();// Fetch names from the database
+        List<String> childNames = dbNameHelper.getAllChildNames(); // Fetch names from the database
         Log.d("Add Child Name", "Child list size: " + childNames.size());
 
         if (!childNames.isEmpty()) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, childNames);
-            childNameSpinner.setAdapter(adapter);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, childNames) {
+                @Override
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    View view = super.getDropDownView(position, convertView, parent);
+                    TextView tv = (TextView) view;
+                    // Change background and text color
+                    if (position == childNameSpinner.getSelectedItemPosition()) {
+                        tv.setBackgroundColor(Color.DKGRAY);
+                        tv.setTextColor(Color.WHITE);
+                    } else {
+                        tv.setBackgroundColor(Color.WHITE);
+                        tv.setTextColor(Color.BLACK);
+                    }
+                    return view;
+                }
+            };
 
-        } else {
+            // Set the dropdown view resource
+            adapter.setDropDownViewResource(R.layout.spinner_item);
+
+            childNameSpinner.setAdapter(adapter);
         }
     }
 

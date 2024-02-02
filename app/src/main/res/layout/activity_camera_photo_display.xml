@@ -9,7 +9,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="800dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -60,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Month 3"
+                android:text="Month 4"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView7"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
@@ -71,14 +74,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Month 4"
+                android:text="Month 8"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView8"
                 app:layout_constraintStart_toStartOf="@+id/textView8"
                 app:layout_constraintTop_toBottomOf="@+id/ivMonth2" />
 
             <ImageView
-                android:id="@+id/ivMonth3"
+                android:id="@+id/ivMonth4"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 app:layout_constraintEnd_toEndOf="@+id/textView9"
@@ -87,7 +90,7 @@
                 app:srcCompat="@drawable/user" />
 
             <ImageView
-                android:id="@+id/ivMonth5"
+                android:id="@+id/ivMonth8"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 app:layout_constraintEnd_toEndOf="@+id/textView10"
@@ -96,10 +99,10 @@
                 app:srcCompat="@drawable/user" />
 
             <ImageView
-                android:id="@+id/ivMonth5"
+                android:id="@+id/ivMonth12"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                app:layout_constraintStart_toStartOf="@+id/ivMonth3"
+                app:layout_constraintStart_toStartOf="@+id/ivMonth4"
                 app:layout_constraintTop_toBottomOf="@+id/textView30"
                 app:srcCompat="@drawable/user" />
 
@@ -120,10 +123,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="TextView"
+                android:text="Month 12"
                 app:layout_constraintEnd_toEndOf="@+id/textView9"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/ivMonth3" />
+                app:layout_constraintTop_toBottomOf="@+id/ivMonth4" />
+
+            <ImageView
+                android:id="@+id/ivMonth"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:layout_constraintEnd_toEndOf="@+id/ivMonth8"
+                app:layout_constraintStart_toStartOf="@+id/ivMonth8"
+                app:layout_constraintTop_toTopOf="@+id/ivMonth8"
+                app:srcCompat="@drawable/user" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Month 24"
+                app:layout_constraintEnd_toEndOf="@+id/textView10"
+                app:layout_constraintStart_toStartOf="@+id/textView10"
+                app:layout_constraintTop_toTopOf="@+id/textView30" />
+
+            <ImageView
+                android:id="@+id/ivMonth24"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView40"
+                app:layout_constraintStart_toStartOf="@+id/textView40"
+                app:layout_constraintTop_toBottomOf="@+id/textView40"
+                app:srcCompat="@drawable/user" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

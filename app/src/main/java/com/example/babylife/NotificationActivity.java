@@ -13,12 +13,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -41,7 +43,7 @@ public class NotificationActivity extends AppCompatActivity {
     private static final String CHANNEL_ID = "baby_notification";
     private static final int NOTIFICATION_ID = 1;
     TextClock tc;
-    Button btnSaveNotfication, btnSetTime;
+    Button btnSaveNotfication, btnSetTime, btnCancel;
 
     TextView tvTimeSet, tvNotificationSet, tvDateSet;
     String[] notificationTypes;
@@ -62,8 +64,7 @@ public class NotificationActivity extends AppCompatActivity {
         spinType = findViewById(R.id.spinnerNotificationType);
         btnSaveNotfication = findViewById(R.id.btnSaveNotification);
         btnSetTime = findViewById(R.id.btnSetNotificationTime);
-        String[] notificationTypes = {"Diaper Change", "Sleep", "Feeding", "Pumping"};
-        String[] notificationFrequencies = {"2 hours", "6 hours", "12 hours", "24 hours", "weekly"};
+        btnCancel = findViewById(R.id.buttonCancelNotification);
 
 
 
@@ -79,17 +80,7 @@ public class NotificationActivity extends AppCompatActivity {
             }
         };
         timeHandler.post(timeRunnable);
-
-        //Spinner for Notification TYpe
-        // Here we are using the default layout directly when initializing the ArrayAdapter
-        ArrayAdapter<String> adapterNotificationType = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_dropdown_item, notificationTypes);
-        spinType.setAdapter(adapterNotificationType);
-
-
-        ArrayAdapter<String> adapterFrequency = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_dropdown_item, notificationFrequencies);
-        spinFrequency.setAdapter(adapterFrequency);
+loadSpinners();
 
         // Listener for the spinner item selection
         AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
@@ -132,9 +123,51 @@ public class NotificationActivity extends AppCompatActivity {
                 scheduleNotification();
             }
         });
-
+btnCancel.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        finish();
+    }
+});
 
     }
+
+    private void loadSpinners() {
+        String[] notificationTypes = {"Diaper Change", "Sleep", "Feeding", "Pumping"};
+        String[] notificationFrequencies = {"2 hours", "6 hours", "12 hours", "24 hours", "weekly"};
+        //Spinner for Notification TYpe
+        // Here we are using the default layout directly when initializing the ArrayAdapter
+        // Customizing spinType similar to spinnerChildName
+        ArrayAdapter<String> adapterNotificationType = new ArrayAdapter<String>(this, R.layout.spinner_item, notificationTypes) {
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                // Apply your custom color changes here
+                // For example, using the same logic as spinnerChildName
+                tv.setBackgroundColor(Color.WHITE); // Default color
+                tv.setTextColor(Color.BLACK); // Default text color
+                return view;
+            }
+        };
+        spinType.setAdapter(adapterNotificationType);
+
+        // Customizing spinFrequency similar to spinnerChildName
+        ArrayAdapter<String> adapterFrequency = new ArrayAdapter<String>(this, R.layout.spinner_item, notificationFrequencies) {
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                // Apply your custom color changes here
+                // For example, using the same logic as spinnerChildName
+                tv.setBackgroundColor(Color.WHITE); // Default color
+                tv.setTextColor(Color.BLACK); // Default text color
+                return view;
+            }
+        };
+        spinFrequency.setAdapter(adapterFrequency);
+    }
+
     // Inside NotificationActivity class
     private static void showNotification(Context context, String type, String frequency) {
         // Create an explicit intent for an Activity in your app

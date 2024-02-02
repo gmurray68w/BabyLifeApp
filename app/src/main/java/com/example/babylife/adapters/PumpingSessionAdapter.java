@@ -96,7 +96,7 @@ public class PumpingSessionAdapter extends RecyclerView.Adapter<PumpingSessionAd
             tvAmount = itemView.findViewById(R.id.tv_pumping_amount_entry_P);
             tvTotalAmount= itemView.findViewById(R.id.tv_pumping_total_amount_P);
             tvSave = itemView.findViewById(R.id.tv_pumping_entry_saved_P);
-            tvSide = itemView.findViewById(R.id.tv_pumping_entry_saved_P);
+            tvSide = itemView.findViewById(R.id.tv_pumping_side_entry_P);
             ivLogTypeImageEntry = itemView.findViewById(R.id.iv_log_type_pumping_image_entry);
         }
     }

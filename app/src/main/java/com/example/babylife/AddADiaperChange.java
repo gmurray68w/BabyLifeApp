@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -179,16 +181,40 @@ public class AddADiaperChange extends AppCompatActivity {
     //Initially loads baby names from database previously setup
     private void loadBabyName() {
         List<String> childNames = dbHelper.getAllChildNames(); // Fetch names from the database
-        Log.d("AddADiaperChange", "Child list size: " + childNames.size());
+        Log.d("Add Child Name", "Child list size: " + childNames.size());
 
         if (!childNames.isEmpty()) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, childNames);
-            spinnerChildName.setAdapter(adapter);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, childNames) {
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
+                    TextView tv = (TextView) view;
+                    tv.setTextColor(Color.WHITE); // Set the text color of selected item to white
+                    return view;
+                }
 
-        } else {
+                @Override
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    View view = super.getDropDownView(position, convertView, parent);
+                    TextView tv = (TextView) view;
+                    // Change background and text color for drop down items
+                    if (position == spinnerChildName.getSelectedItemPosition()) {
+                        tv.setBackgroundColor(Color.DKGRAY);
+                        tv.setTextColor(Color.WHITE);
+                    } else {
+                        tv.setBackgroundColor(Color.WHITE);
+                        tv.setTextColor(Color.BLACK);
+                    }
+                    return view;
+                }
+            };
+
+            // Customize the spinner layout
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            spinnerChildName.setAdapter(adapter);
         }
     }
-
     //Select date and time of diaper change.
     private void showDateAndTimePicker(){
         final Calendar calendar = Calendar.getInstance();

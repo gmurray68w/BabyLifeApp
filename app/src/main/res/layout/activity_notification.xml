@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/top_arch_shape">
 
     <TextClock
         android:id="@+id/textClock"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:gravity="center_horizontal|center_vertical"
+        android:textColor="#FFFFFF"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="No time set."
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/btnSetNotificationTime"
         app:layout_constraintStart_toStartOf="@+id/btnSetNotificationTime"
         app:layout_constraintTop_toBottomOf="@+id/btnSetNotificationTime" />
@@ -42,6 +45,8 @@
         android:layout_marginTop="32dp"
         android:text="Type of notification:"
         android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTimeSet" />
 
@@ -61,6 +66,8 @@
         android:layout_marginTop="16dp"
         android:text="Frequency of notification"
         android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/tvTypeSpinner"
         app:layout_constraintTop_toBottomOf="@+id/tvTypeSpinner" />
 
@@ -90,7 +97,9 @@
         android:text="Notification text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFrequencyText" />
+        app:layout_constraintTop_toBottomOf="@+id/tvFrequencyText"
+        android:textColor="@color/white"
+/>
 
     <Button
         android:id="@+id/btnSaveNotification"
@@ -106,7 +115,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="No date set:"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/tvTimeSet"
         app:layout_constraintStart_toStartOf="@+id/tvTimeSet"
         app:layout_constraintTop_toBottomOf="@+id/tvTimeSet" />
+
+    <Button
+        android:id="@+id/buttonCancelNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        app:layout_constraintEnd_toEndOf="@+id/btnSaveNotification"
+        app:layout_constraintStart_toStartOf="@+id/btnSaveNotification"
+        app:layout_constraintTop_toBottomOf="@+id/btnSaveNotification" />
 </androidx.constraintlayout.widget.ConstraintLayout>

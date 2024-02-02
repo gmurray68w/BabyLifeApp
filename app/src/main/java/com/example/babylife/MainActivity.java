@@ -516,22 +516,37 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options_menu, menu);
+
         return true;
     }
 
     // This method will handle the actions on the toolbar menu items
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_more) {
-            // Find the current view for the "More" item to anchor the popup menu
-            View view = findViewById(R.id.action_more);
-            if (view == null) {
-                view = mTb.findViewById(R.id.action_more);
-            }
-            showPopup(view);
-            return true;
+        Log.d("MainActivity", "Menu item selected: " + item.getItemId() + ", Name: " + getResources().getResourceEntryName(item.getItemId()));
+
+        Toast.makeText(MainActivity.this, ("Options selected: " + item.getItemId()), Toast.LENGTH_LONG).show();
+        Log.d("MainActivity", "Popup menu item clicked: " + item.getTitle());
+
+        // Handle clicks on the popup menu items here
+        int id = item.getItemId();
+        if(id == R.id.action_bar_notification){
+            Intent i = new Intent(MainActivity.this, NotificationActivity.class);
+            startActivity(i);
+        } else if (id == R.id.action_photo_progress) {
+            // Handle "Photo Progress" action
+            Intent i = new Intent(MainActivity.this, CameraPhotoDisplay.class);
+            startActivity(i);
+        } else if (id == R.id.action_view_data) {
+            Intent i = new Intent(MainActivity.this, ChildDataView.class);
+            startActivity(i);
+        } else if (id == R.id.action_view_charts) {
+            Intent i = new Intent(MainActivity.this, BabyDataChart.class);
+            startActivity(i);
         }
-        return super.onOptionsItemSelected(item);
+        return true;
+
+
     }
     private void showPopup(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
@@ -540,6 +555,10 @@ public class MainActivity extends AppCompatActivity {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                // Log to debug the menu item click
+                Toast.makeText(MainActivity.this, ("Options selected: " + item.getItemId()), Toast.LENGTH_LONG).show();
+                Log.d("MainActivity", "Popup menu item clicked: " + item.getTitle());
+
                 // Handle clicks on the popup menu items here
                 int id = item.getItemId();
                 if(id == R.id.action_bar_notification){
@@ -552,7 +571,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.action_view_data) {
                     Intent i = new Intent(MainActivity.this, ChildDataView.class);
                     startActivity(i);
-
                 } else if (id == R.id.action_view_charts) {
                     Intent i = new Intent(MainActivity.this, BabyDataChart.class);
                     startActivity(i);

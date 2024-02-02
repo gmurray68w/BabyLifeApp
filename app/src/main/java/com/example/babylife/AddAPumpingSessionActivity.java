@@ -2,18 +2,22 @@ package com.example.babylife;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -44,6 +48,10 @@ public class AddAPumpingSessionActivity extends AppCompatActivity {
     private  String date;
     private CheckBox cbSave, cbLeft, cbRight;
     private PumpingSessionHelper dbHelper;
+    private TextView tvEntryNameP, tvDateEntryP, tvTimeEntryP, tvTotalAmountP, tvDurationP, tvAmountP, tvAdditionalNotesEntryP, tvSaveP, tvSideP;
+
+    private ImageView ivLogTypeImageEntryP;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +67,15 @@ public class AddAPumpingSessionActivity extends AppCompatActivity {
         tvInfoTextPumping = findViewById(R.id.tvInfoTextPumping);
         btnDate = findViewById(R.id.btnChooseDatePumping);
         spinBabyName = findViewById(R.id.spinner_baby_name_pumping);
+        tvEntryNameP = findViewById(R.id.tv_pumping_entry_name_F);
+        tvDateEntryP = findViewById(R.id.tv_pumping_date_entry_P);
+        tvTimeEntryP = findViewById(R.id.tv_pumping_time_entry_P);
+        tvDurationP = findViewById(R.id.tv_pumping_duration_entry_F);
+        tvAmountP = findViewById(R.id.tv_pumping_amount_entry_P);
+        tvTotalAmountP=findViewById(R.id.tv_pumping_total_amount_P);
+        tvSaveP = findViewById(R.id.tv_pumping_entry_saved_P);
+        tvSideP = findViewById(R.id.tv_pumping_side_entry_P);
+        ivLogTypeImageEntryP = findViewById(R.id.iv_log_type_pumping_image_entry);
 
 
         dbNameHelper = new SQLiteBabyName(this);
@@ -132,14 +149,31 @@ updateInfoDisplay();
     }
 
     private void loadBabyNames() {
-        List<String> childNames = dbNameHelper.getAllChildNames();// Fetch names from the database
+        List<String> childNames = dbNameHelper.getAllChildNames(); // Fetch names from the database
         Log.d("Add Child Name", "Child list size: " + childNames.size());
 
         if (!childNames.isEmpty()) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, childNames);
-            spinBabyName.setAdapter(adapter);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, childNames) {
+                @Override
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    View view = super.getDropDownView(position, convertView, parent);
+                    TextView tv = (TextView) view;
+                    // Change background and text color
+                    if (position == spinBabyName.getSelectedItemPosition()) {
+                        tv.setBackgroundColor(Color.DKGRAY);
+                        tv.setTextColor(Color.WHITE);
+                    } else {
+                        tv.setBackgroundColor(Color.WHITE);
+                        tv.setTextColor(Color.BLACK);
+                    }
+                    return view;
+                }
+            };
 
-        } else {
+            // Set the dropdown view resource
+            adapter.setDropDownViewResource(R.layout.spinner_item);
+
+            spinBabyName.setAdapter(adapter);
         }
     }
 
@@ -204,6 +238,7 @@ updateInfoDisplay();
         Log.d("PumpingSession", "Inserting: Name=" + name + ", Date=" + date + ", Duration=" + duration + ", Amount=" + amount + ", Side=" + side + ", Save=" + saveInt);
         dbHelper.insertPumpingLogWithTotal("pumping_log", name, date, amount, duration, side, saveBool);
 
+        clearFields();
         // Optionally finish the activity or show a confirmation message
         finish();
     }
@@ -261,16 +296,26 @@ updateInfoDisplay();
             // Use selected date and time
             date = selectedDate;
         }
+        //set values
+        tvEntryNameP.setText(name);
+        tvDateEntryP.setText(selectedDate);
+        tvTimeEntryP.setText(selectedTime);
+        tvDurationP.setText(duration);
 
-        // Construct the summary text
-        String summary =  "Name" + name + "\n"+
-                "Date: " + selectedDate + "\n"+
-                "Time: " + selectedTime + "\n"+
-                "Duration: " + duration + "mins\n" +
-                "Amount: " + amount + " oz\n" +
-                "Side: " + side + "\n" +
-                "Save: " + (saveBool ? "Yes" : "No");
-        tvInfoTextPumping.setText(summary);
 
+        tvSaveP.setText(cbSave.getText().toString());
+        tvSideP.setText(side);
+
+    }
+    private void clearFields(){
+        tvEntryNameP.setText("");
+        tvDateEntryP.setText("");
+
+        tvTimeEntryP.setText("");
+        tvDurationP.setText("");
+        tvAmountP.setText("");
+        tvTotalAmountP.setText("");
+
+        tvSideP.setText("");
     }
 }

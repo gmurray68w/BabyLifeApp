@@ -25,6 +25,12 @@
     <string name="notifications_set">Set Notifications</string>
     <string name="add_child">Add Child</string>
 
+    <string-array name="log_types">
+        <item>Feeding Amount</item>
+        <item>Pumping Amount</item>
+        <item>Freezer Stash</item>
+        <item>Sleeping Amount</item>
+    </string-array>
 
     <string-array name="notification_types_array">
         <item>Diaper Change</item>

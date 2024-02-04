@@ -27,9 +27,11 @@
 
     <string-array name="log_types">
         <item>Feeding Amount</item>
+        <item>Feeding Duration</item>
         <item>Pumping Amount</item>
         <item>Freezer Stash</item>
         <item>Sleeping Amount</item>
+        <item>Sleeping Duration</item>
     </string-array>
 
     <string-array name="notification_types_array">

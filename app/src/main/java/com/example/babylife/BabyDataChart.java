@@ -138,6 +138,8 @@ public class BabyDataChart extends AppCompatActivity {
 
         if("Feeding Amount".equals(selectedLogType)){
             data = getFeedingDataFromDB(selectedChild);
+        }else if("Feeding Duration".equals(selectedLogType)){
+            data = getFeedingDurationDataFromDB(selectedChild);
         }else if ("Sleeping Amount".equals(selectedLogType)){
             data = getSleepingDataFromDB(selectedChild);
 
@@ -146,6 +148,10 @@ public class BabyDataChart extends AppCompatActivity {
         }else if("Freezer Stash".equals(selectedLogType)){
             data = getPumpingTotalAmountDataFromDB(selectedChild);
         }
+        int entryCount = data.size(); // Number of entries in your dataset
+        float scaleFactor = 100f; // Adjust this factor to scale the width of each bar entry
+        barChart.getLayoutParams().width = (int) (entryCount * scaleFactor);
+
         BarData barData = new BarData(getDataSet(data));
         barChart.setBackgroundColor(Color.TRANSPARENT);
         barChart.getXAxis().setTextColor(Color.WHITE);
@@ -267,6 +273,48 @@ public class BabyDataChart extends AppCompatActivity {
         return feedingData;
     }
 
+    private ArrayList<Float> getFeedingDurationDataFromDB(String childName) {
+
+        ArrayList<Float> feedingData = new ArrayList<>();
+        SQLiteDatabase db = feedingHelper.getReadableDatabase();
+
+        String selection = FeedingLogContract.FeedingLogEntry.COLUMN_NAME + " = ?";
+        String[] selectionArgs = { childName };
+        String sortOrder = FeedingLogContract.FeedingLogEntry.COLUMN_DATE + " DESC";
+
+        Cursor cursor = db.query(
+                FeedingLogContract.FeedingLogEntry.TABLE_NAME,
+                new String[] {FeedingLogContract.FeedingLogEntry.COLUMN_DURATION},
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder
+        );
+        try {
+            // Iterate over the cursor to get amounts
+            while (cursor.moveToNext()) {
+                String amountStr = cursor.getString(cursor.getColumnIndexOrThrow(FeedingLogContract.FeedingLogEntry.COLUMN_DURATION));
+                try {
+                    // Convert the amount string to float and add to the list
+                    float amount = Float.parseFloat(amountStr);
+                    feedingData.add(amount);
+                    Log.d("FeedingData", "Amount parsed: " + amount); // Add this line for debugging
+
+                } catch (NumberFormatException e) {
+                    // Handle parse error
+                    Log.e("getFeedingDataFromDB", "Error parsing amount to float: " + amountStr, e);
+                }
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        db.close();
+        Log.e("BABYDATA", feedingData.toString());
+        return feedingData;
+    }
     private ArrayList<Float> getPumpingDataFromDB(String childName) {
 
         ArrayList<Float> pumpingData = new ArrayList<>();
@@ -394,6 +442,7 @@ public class BabyDataChart extends AppCompatActivity {
         Log.e("BABYPUMPINGDATA", sleepingData.toString());
         return sleepingData;
     }
+
     //Sets the xAxis values based on each entry that is in current database.
     private ArrayList<String> getXAxisValues(int numberOfEntries) {
         ArrayList<String> xAxis = new ArrayList();

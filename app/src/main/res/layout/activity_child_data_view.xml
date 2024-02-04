@@ -4,21 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
-    android:backgroundTint="@color/grey"
-    tools:context=".ChildDataView">
+    tools:context=".ChildDataView"
+    android:background="@drawable/top_arch_shape">
 
     <Spinner
         android:id="@+id/spinner_name"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
     <Spinner
-        android:id="@+id/spinner_date"
+        android:id="@+id/spinner_type"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -37,10 +36,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_name" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Data Logs"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/avatar" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

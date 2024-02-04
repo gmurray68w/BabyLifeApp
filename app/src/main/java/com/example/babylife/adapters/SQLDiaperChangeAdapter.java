@@ -69,7 +69,7 @@ public class SQLDiaperChangeAdapter extends RecyclerView.Adapter<SQLDiaperChange
         }
         cursor = newCursor;
         if (newCursor != null) {
-            notifyDataSetChanged();
+            this.notifyDataSetChanged();
         }
     }
 

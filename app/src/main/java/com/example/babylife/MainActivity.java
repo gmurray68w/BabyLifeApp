@@ -362,8 +362,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadSleepData() {
         SQLiteDatabase db = sleepHelper.getReadableDatabase();
-
-        Cursor cursor = db.query(SleepSessionContract.SleepLogEntry.TABLE_NAME, null, null, null, null, null, null);
+        String sortOrder = SleepSessionContract.SleepLogEntry.COLUMN_DATE + " DESC";
+        Cursor cursor = db.query(SleepSessionContract.SleepLogEntry.TABLE_NAME, null, null, null, null, null, sortOrder);
 
         if (cursor != null && cursor.getCount() > 0) {
             Log.d("MainActivity", "Cursor has " + cursor.getCount() + " entries");
@@ -409,7 +409,8 @@ public class MainActivity extends AppCompatActivity {
     //TO help with the recyclerview adapter and cursors when loading RV.
     private void loadFeedingData() {
         SQLiteDatabase db = feedingHelper.getReadableDatabase();
-        Cursor cursor = db.query(FeedingLogContract.FeedingLogEntry.TABLE_NAME, null, null, null, null, null, null);
+        String sortOrder = FeedingLogContract.FeedingLogEntry.COLUMN_DATE + " DESC";
+        Cursor cursor = db.query(FeedingLogContract.FeedingLogEntry.TABLE_NAME, null, null, null, null, null, sortOrder);
 
         if (cursor != null && cursor.getCount() > 0) {
             Log.d("MainActivity", "Cursor has " + cursor.getCount() + " entries");
@@ -424,8 +425,9 @@ public class MainActivity extends AppCompatActivity {
         //Loads the sqlite data with a simple query
         //Future this will need to be recreated and changed for more complex queries.
         SQLiteDatabase db = helper.getReadableDatabase();
+        String sortOrder = DiaperChangeContract.DiaperLogEntry.COLUMN_DATE + " DESC";
 
-        Cursor cursor = db.query(DiaperChangeContract.DiaperLogEntry.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = db.query(DiaperChangeContract.DiaperLogEntry.TABLE_NAME, null, null, null, null, null, sortOrder);
         if (adapter != null) {
             adapter.swapCursor(cursor);
         } else {

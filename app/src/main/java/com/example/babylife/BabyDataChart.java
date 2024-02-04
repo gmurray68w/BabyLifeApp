@@ -52,7 +52,7 @@ public class BabyDataChart extends AppCompatActivity {
         setContentView(R.layout.activity_baby_data_chart);
         spinnerChildName=findViewById(R.id.spinnerChartChildName);
         spinnerType=findViewById(R.id.spinnerChartType);
-        btnReturn=findViewById(R.id.btnReturn);
+        btnReturn=findViewById(R.id.btnExitCharts);
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

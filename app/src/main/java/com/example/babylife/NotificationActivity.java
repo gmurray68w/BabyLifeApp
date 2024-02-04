@@ -6,7 +6,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import android.app.AlarmManager;
-import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.BroadcastReceiver;
@@ -27,8 +26,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextClock;
 import android.widget.TextView;
-
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

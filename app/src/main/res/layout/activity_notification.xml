@@ -16,7 +16,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView43" />
 
     <Button
         android:id="@+id/btnSetNotificationTime"
@@ -80,15 +80,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvFrequencyText" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSavedNotifications"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSaveNotification" />
-
     <TextView
         android:id="@+id/tvNotificationInfo"
         android:layout_width="wrap_content"
@@ -105,10 +96,11 @@
         android:id="@+id/btnSaveNotification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Save:"
-        app:layout_constraintEnd_toEndOf="@+id/tvNotificationInfo"
-        app:layout_constraintStart_toStartOf="@+id/tvNotificationInfo"
-        app:layout_constraintTop_toBottomOf="@+id/tvNotificationInfo" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/tvDateSetNotification"
@@ -124,8 +116,23 @@
         android:id="@+id/buttonCancelNotification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Cancel"
-        app:layout_constraintEnd_toEndOf="@+id/btnSaveNotification"
-        app:layout_constraintStart_toStartOf="@+id/btnSaveNotification"
-        app:layout_constraintTop_toBottomOf="@+id/btnSaveNotification" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView43"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Notification Set"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
